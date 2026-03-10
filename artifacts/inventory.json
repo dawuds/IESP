@@ -15,13 +15,14 @@
     },
     "scope": {
       "name": "Scope Definitions",
-      "count": 5,
+      "count": 6,
       "items": [
         { "slug": "scoping-methodology", "name": "IESP Scoping Methodology", "format": "md" },
         { "slug": "cloud-services", "name": "Cloud Services Scope", "format": "md" },
         { "slug": "ai-emerging-tech", "name": "AI and Emerging Technology Scope", "format": "md" },
         { "slug": "data-centre", "name": "Data Centre Scope (DCRA)", "format": "md" },
-        { "slug": "network-infrastructure", "name": "Network Infrastructure Scope (NRA)", "format": "md" }
+        { "slug": "network-infrastructure", "name": "Network Infrastructure Scope (NRA)", "format": "md" },
+        { "slug": "digital-services", "name": "Digital Services Scope (16.4/16.5)", "format": "md" }
       ]
     },
     "audit-work-programs": {
