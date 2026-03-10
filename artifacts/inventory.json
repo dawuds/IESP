@@ -4,9 +4,10 @@
   "categories": {
     "requirements": {
       "name": "Regulatory Requirements",
-      "count": 5,
+      "count": 6,
       "items": [
         { "slug": "regulatory-requirements", "name": "RMIT IESP Regulatory Requirements", "format": "md" },
+        { "slug": "appendix-7-assessment", "name": "Appendix 7 IESP Assessment Framework (Parts A-D)", "format": "md" },
         { "slug": "dcra-requirements", "name": "DCRA Requirements (14.1)", "format": "md" },
         { "slug": "nra-requirements", "name": "NRA Requirements (14.2)", "format": "md" },
         { "slug": "cloud-pre-implementation", "name": "Cloud Pre-Implementation Review Requirements (17.1)", "format": "md" },
@@ -27,8 +28,9 @@
     },
     "audit-work-programs": {
       "name": "Audit Work Programs",
-      "count": 5,
+      "count": 6,
       "items": [
+        { "slug": "awp-appendix-7-part-d", "name": "Appendix 7 Part D Minimum Controls AWP", "format": "md" },
         { "slug": "awp-dcra", "name": "DCRA Audit Work Program", "format": "md" },
         { "slug": "awp-nra", "name": "NRA Audit Work Program", "format": "md" },
         { "slug": "awp-cloud", "name": "Cloud IESP Audit Work Program", "format": "md" },
