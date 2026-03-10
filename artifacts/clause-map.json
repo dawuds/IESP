@@ -1,0 +1,93 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-03-11",
+  "mappings": [
+    {
+      "engagementType": "dcra",
+      "name": "Data Centre Resilience Assessment",
+      "triggerClauses": ["14.1"],
+      "scopeClauses": ["10.24", "10.25", "10.26", "10.27", "10.28"],
+      "reportingRequirements": ["App7-PartA", "App7-PartC", "App7-PartD"],
+      "frequency": "Every 3 years or material change",
+      "marker": "S",
+      "boardDeliberation": true
+    },
+    {
+      "engagementType": "nra",
+      "name": "Network Resilience Assessment",
+      "triggerClauses": ["14.2"],
+      "scopeClauses": ["10.36", "10.37", "10.38", "10.39", "10.40", "10.41", "10.42", "10.43"],
+      "reportingRequirements": ["App7-PartA", "App7-PartC", "App7-PartD"],
+      "frequency": "Every 3 years or material change",
+      "marker": "S",
+      "boardDeliberation": true
+    },
+    {
+      "engagementType": "cloud-pre-implementation",
+      "name": "Cloud Services Pre-Implementation Review",
+      "triggerClauses": ["17.1"],
+      "scopeClauses": ["10.50", "10.51", "10.52"],
+      "reportingRequirements": ["App7-PartA", "App7-PartB", "App7-PartC", "App7-PartD"],
+      "appendixScope": ["Appendix 10"],
+      "frequency": "First-time adoption of public cloud for critical systems",
+      "marker": "S",
+      "boardDeliberation": true,
+      "bnmConsultation": true
+    },
+    {
+      "engagementType": "emerging-tech-pre-implementation",
+      "name": "Emerging Technology Pre-Implementation Review",
+      "triggerClauses": ["17.1"],
+      "scopeClauses": ["9.2"],
+      "reportingRequirements": ["App7-PartA", "App7-PartB", "App7-PartC", "App7-PartD"],
+      "appendixScope": ["Appendix 9"],
+      "frequency": "First-time adoption of emerging technology for critical systems",
+      "marker": "S",
+      "boardDeliberation": true,
+      "bnmConsultation": true
+    },
+    {
+      "engagementType": "digital-services-enhancement",
+      "name": "Digital Services Enhancement Assurance",
+      "triggerClauses": ["16.4", "16.5"],
+      "scopeClauses": ["12.1", "12.2", "12.3", "12.4", "12.5", "12.6", "12.7", "12.8", "12.9"],
+      "reportingRequirements": ["App7-PartA", "App7-PartC", "App7-PartD"],
+      "frequency": "Prior to notification for non-simplified enhancements",
+      "marker": "S",
+      "boardDeliberation": false
+    },
+    {
+      "engagementType": "subsequent-cloud-notification",
+      "name": "Subsequent Cloud/Emerging Tech Notification",
+      "triggerClauses": ["17.2"],
+      "scopeClauses": ["10.50", "10.51", "10.52"],
+      "reportingRequirements": ["App7-PartA", "App7-PartB"],
+      "appendixScope": ["Appendix 10", "Appendix 9"],
+      "frequency": "Each subsequent adoption of cloud/emerging tech for critical systems",
+      "marker": "S",
+      "prerequisites": ["17.1 consultation completed with no BNM concerns", "Enhanced TRMF for cloud/emerging tech", "Independent assurance on framework", "Sufficient incident response plans"],
+      "boardDeliberation": false
+    },
+    {
+      "engagementType": "bnm-directed",
+      "name": "BNM Discretionary Direction Review",
+      "triggerClauses": ["17.4", "1.4"],
+      "scopeClauses": [],
+      "reportingRequirements": ["As directed by BNM"],
+      "frequency": "As directed by BNM",
+      "marker": "S",
+      "boardDeliberation": true,
+      "notes": "BNM may direct IESP review for non-critical systems or when 17.1/17.2 prerequisites not met"
+    }
+  ],
+  "clauseToEngagement": {
+    "14.1": ["dcra"],
+    "14.2": ["nra"],
+    "17.1": ["cloud-pre-implementation", "emerging-tech-pre-implementation"],
+    "17.2": ["subsequent-cloud-notification"],
+    "17.4": ["bnm-directed"],
+    "16.4": ["digital-services-enhancement"],
+    "16.5": ["digital-services-enhancement"],
+    "1.4": ["bnm-directed"]
+  }
+}

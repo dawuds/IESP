@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "title": "IESP Engagement Decision Tree",
+  "source": "BNM RMiT Nov 2025",
+  "rootNode": {
+    "id": "start",
+    "question": "What type of technology activity is the financial institution undertaking?",
+    "options": [
+      {
+        "label": "Data centre infrastructure (own or third-party managed)",
+        "nextNode": "dcra-check"
+      },
+      {
+        "label": "Network infrastructure changes or periodic assessment",
+        "nextNode": "nra-check"
+      },
+      {
+        "label": "Adopting public cloud for critical systems",
+        "nextNode": "cloud-check"
+      },
+      {
+        "label": "Adopting emerging technology (AI/ML) for critical systems",
+        "nextNode": "emerging-tech-check"
+      },
+      {
+        "label": "Introducing or enhancing digital services",
+        "nextNode": "digital-services-check"
+      },
+      {
+        "label": "BNM has issued a directive",
+        "nextNode": "bnm-directed"
+      },
+      {
+        "label": "BNM identifies material technology risk management weaknesses (para 1.4)",
+        "nextNode": "bnm-directed"
+      }
+    ]
+  },
+  "nodes": {
+    "dcra-check": {
+      "question": "Has a DCRA been conducted in the last 3 years AND no material changes to DC infrastructure?",
+      "options": [
+        { "label": "Yes - DCRA is current", "outcome": "no-iesp", "note": "Monitor for material changes; schedule next DCRA before 3-year expiry" },
+        { "label": "No - DCRA is due or material change occurred", "outcome": "iesp-required", "engagementType": "dcra", "clause": "14.1" }
+      ]
+    },
+    "nra-check": {
+      "question": "Has an NRA been conducted in the last 3 years AND no material changes to network design?",
+      "options": [
+        { "label": "Yes - NRA is current", "outcome": "no-iesp", "note": "Monitor for material changes; schedule next NRA before 3-year expiry" },
+        { "label": "No - NRA is due or material change occurred", "outcome": "iesp-required", "engagementType": "nra", "clause": "14.2" }
+      ]
+    },
+    "cloud-check": {
+      "question": "Is this the first-time adoption of public cloud for critical systems?",
+      "options": [
+        { "label": "Yes - first time", "outcome": "iesp-required", "engagementType": "cloud-pre-implementation", "clause": "17.1", "note": "Must consult BNM before adoption. Requires risk assessment (App 7 Part A), CISO confirmation (Part B), and third-party pre-implementation review (Part C, App 10)" },
+        { "label": "No - subsequent adoption", "nextNode": "cloud-subsequent" }
+      ]
+    },
+    "cloud-subsequent": {
+      "question": "Does this adoption materially alter prior assessments and representations to BNM?",
+      "options": [
+        { "label": "Yes - material change", "outcome": "iesp-required", "engagementType": "subsequent-cloud-notification", "clause": "17.2", "note": "Must notify BNM with updated info. Prerequisites: 17.1 completed, enhanced TRMF, independent assurance on framework, sufficient IRP" },
+        { "label": "No - enhancement only, no material change", "outcome": "no-iesp", "clause": "17.3", "note": "Notification not required per para 17.3 exemption" }
+      ]
+    },
+    "emerging-tech-check": {
+      "question": "Is this the first-time adoption of emerging technology for critical systems?",
+      "options": [
+        { "label": "Yes - first time", "outcome": "iesp-required", "engagementType": "emerging-tech-pre-implementation", "clause": "17.1", "note": "Must consult BNM. Requires risk assessment (App 7 Part A), CISO confirmation (Part B), and third-party pre-implementation review (Part C, App 9)" },
+        { "label": "No - subsequent adoption", "nextNode": "cloud-subsequent" }
+      ]
+    },
+    "digital-services-check": {
+      "question": "Does the enhancement meet the simplified notification criteria in Appendix 6?",
+      "options": [
+        { "label": "Yes - qualifies for simplified notification", "outcome": "no-iesp", "clause": "16.3", "note": "Submit simplified notification with description and risk assessment" },
+        { "label": "No - does not qualify for simplified notification", "outcome": "iesp-required", "engagementType": "digital-services-enhancement", "clause": "16.4", "note": "Must engage independent external party per Part A of App 7 and obtain CISO/board confirmation per Part B" }
+      ]
+    },
+    "bnm-directed": {
+      "outcome": "iesp-required",
+      "engagementType": "bnm-directed",
+      "clause": "17.4 / 1.4",
+      "note": "Comply promptly with BNM directive. May apply to non-critical systems. Scope as directed by BNM."
+    }
+  },
+  "outcomes": {
+    "iesp-required": {
+      "label": "IESP Review Required",
+      "actions": [
+        "Appoint technically competent independent ESP",
+        "Define scope per relevant clauses and appendices",
+        "Execute review per Appendix 7 Part C requirements",
+        "Produce Risk Assessment Report per Appendix 7 Part A",
+        "Assess minimum controls per Appendix 7 Part D",
+        "Present findings to designated board-level committee (where applicable)"
+      ]
+    },
+    "no-iesp": {
+      "label": "IESP Review Not Currently Required",
+      "actions": [
+        "Document rationale for non-requirement",
+        "Monitor for trigger events (material changes, 3-year cycle, BNM direction)",
+        "Maintain assessment schedules and trigger logs"
+      ]
+    }
+  }
+}

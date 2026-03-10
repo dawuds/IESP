@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-03-11",
+  "categories": {
+    "requirements": {
+      "name": "Regulatory Requirements",
+      "count": 5,
+      "items": [
+        { "slug": "regulatory-requirements", "name": "RMIT IESP Regulatory Requirements", "format": "md" },
+        { "slug": "dcra-requirements", "name": "DCRA Requirements (14.1)", "format": "md" },
+        { "slug": "nra-requirements", "name": "NRA Requirements (14.2)", "format": "md" },
+        { "slug": "cloud-pre-implementation", "name": "Cloud Pre-Implementation Review Requirements (17.1)", "format": "md" },
+        { "slug": "emerging-tech-review", "name": "Emerging Technology Review Requirements (17.1, App 9)", "format": "md" }
+      ]
+    },
+    "scope": {
+      "name": "Scope Definitions",
+      "count": 5,
+      "items": [
+        { "slug": "scoping-methodology", "name": "IESP Scoping Methodology", "format": "md" },
+        { "slug": "cloud-services", "name": "Cloud Services Scope", "format": "md" },
+        { "slug": "ai-emerging-tech", "name": "AI and Emerging Technology Scope", "format": "md" },
+        { "slug": "data-centre", "name": "Data Centre Scope (DCRA)", "format": "md" },
+        { "slug": "network-infrastructure", "name": "Network Infrastructure Scope (NRA)", "format": "md" }
+      ]
+    },
+    "audit-work-programs": {
+      "name": "Audit Work Programs",
+      "count": 5,
+      "items": [
+        { "slug": "awp-dcra", "name": "DCRA Audit Work Program", "format": "md" },
+        { "slug": "awp-nra", "name": "NRA Audit Work Program", "format": "md" },
+        { "slug": "awp-cloud", "name": "Cloud IESP Audit Work Program", "format": "md" },
+        { "slug": "awp-ai-emerging-tech", "name": "AI/Emerging Tech Audit Work Program", "format": "md" },
+        { "slug": "awp-digital-services", "name": "Digital Services Enhancement Audit Work Program", "format": "md" }
+      ]
+    },
+    "templates": {
+      "name": "Engagement Templates",
+      "count": 7,
+      "items": [
+        { "slug": "engagement-letter", "name": "IESP Engagement Letter", "format": "md" },
+        { "slug": "scoping-document", "name": "Scope Definition Document", "format": "md" },
+        { "slug": "risk-assessment-report", "name": "Risk Assessment Report (App 7 Part A)", "format": "md" },
+        { "slug": "confirmation-letter", "name": "Format of Confirmation (App 7 Part B)", "format": "md" },
+        { "slug": "findings-report", "name": "IESP Findings Report", "format": "md" },
+        { "slug": "management-representation", "name": "Management Representation Letter", "format": "md" },
+        { "slug": "board-deliberation-pack", "name": "Board Deliberation Pack", "format": "md" }
+      ]
+    },
+    "evidence": {
+      "name": "Evidence Checklists",
+      "count": 5,
+      "items": [
+        { "slug": "evidence-checklist-dcra", "name": "DCRA Evidence Checklist", "format": "md" },
+        { "slug": "evidence-checklist-nra", "name": "NRA Evidence Checklist", "format": "md" },
+        { "slug": "evidence-checklist-cloud", "name": "Cloud IESP Evidence Checklist", "format": "md" },
+        { "slug": "evidence-checklist-ai", "name": "AI/Emerging Tech Evidence Checklist", "format": "md" },
+        { "slug": "evidence-checklist-digital", "name": "Digital Services Evidence Checklist", "format": "md" }
+      ]
+    }
+  }
+}
