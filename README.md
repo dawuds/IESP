@@ -29,6 +29,7 @@ decision-tree/              Decision logic for when IESP is required
 
 requirements/               Regulatory requirements by engagement type
   regulatory-requirements.md  All RMIT clauses triggering IESP
+  appendix-7-assessment.md    Appendix 7 IESP assessment framework (Parts A–D)
   dcra-requirements.md        DCRA (14.1) requirements
   nra-requirements.md         NRA (14.2) requirements
   cloud-pre-implementation.md Cloud review (17.1) requirements
@@ -40,12 +41,14 @@ scope/                      Scope definition guides
   ai-emerging-tech.md         AI/ML scope (App 9)
   data-centre.md              DCRA scope (10.24–10.28)
   network-infrastructure.md   NRA scope (10.36–10.43)
+  digital-services.md         Digital services scope (16.4/16.5)
 
 controls/                   Control frameworks for IESP assessment
   control-domains.json        Minimum control domains (App 7 Part D)
   control-mapping.json        Cross-mapping to RMIT, ISO 27001, NIST
 
 audit-work-programs/        Step-by-step review procedures
+  awp-appendix-7-part-d.md    Appendix 7 Part D minimum controls AWP (universal)
   awp-dcra.md                 DCRA work program (~30 test steps)
   awp-nra.md                  NRA work program (~30 test steps)
   awp-cloud.md                Cloud IESP work program (~50 test steps)
@@ -67,6 +70,10 @@ evidence/                   Evidence collection guides
   evidence-checklist-nra.md   NRA evidence checklist
   evidence-checklist-cloud.md Cloud IESP evidence checklist
   evidence-checklist-ai.md    AI/emerging tech evidence checklist
+  evidence-checklist-digital.md  Digital services evidence checklist
+
+examples/                   Worked examples with fictitious data
+  bank-perdana-cloud/         Full cloud IESP engagement (14 files, kick-off to board resolution)
 
 artifacts/                  Structured data
   clause-map.json             IESP ↔ RMIT clause bidirectional map
@@ -94,6 +101,127 @@ BNM prescribes a structured reporting framework in Appendix 7:
 | **Part B** | Format of Confirmation | 9-point attestation by CISO / board chair / senior management confirming readiness |
 | **Part C** | Requirements on External Party Assurance | 6 requirements the independent ESP must follow |
 | **Part D** | Minimum Controls to be Assessed | Access control, physical security, operations security, communication security, incident management, BCP, online transactions, mobile security |
+
+## Understanding the IESP Conclusion — Effectiveness, Not Compliance
+
+This is one of the most important distinctions for IESP practitioners to understand. **The IESP does not opine on compliance.** The IESP opines on **effectiveness of controls**.
+
+### What BNM Actually Requires
+
+The Appendix 7 Part A report has three conclusion components, each serving a different purpose:
+
+| Component | Where | What the IESP States |
+|-----------|-------|---------------------|
+| **Technology Risk Assessment** | Section 4 | Assurance on the **effectiveness** of technology risk control and mitigation in meeting Part D expectations |
+| **Negative Attestation** | Part C point 5 | Whether **exceptions** were noted against the prescribed risk areas |
+| **Overall Recommendation** | Section 5 | The IESP's recommendation on whether to proceed |
+
+### 1. Effectiveness — Not Compliance
+
+BNM's exact wording (Appendix 7, Section 4):
+
+> *"Technology risk assessment shall provide assurance on the **effectiveness** of technology risk control and mitigation performed by the financial institution in meeting expectations outlined in Part D of this Appendix and paragraph 17.1 (for cloud services and emerging technology)."*
+
+**Why this matters:** "Compliance" asks *"does the FI follow the rules?"* — that is the FI's own responsibility and BNM's supervisory role. "Effectiveness" asks *"do the FI's controls actually work to mitigate technology risk?"* — that is what the IESP assesses.
+
+| Rating | Meaning | When to Use |
+|--------|---------|-------------|
+| **Effective** | Controls are adequately designed and operating effectively to mitigate technology risk in the assessed areas | All Part D control areas meet expectations; no material exceptions |
+| **Partially Effective** | Controls are in place but have gaps that reduce their ability to mitigate technology risk | Some Part D areas meet expectations, others have material gaps; exceptions noted |
+| **Ineffective** | Controls are absent, poorly designed, or not operating in a manner that mitigates technology risk | Fundamental control failures across multiple Part D areas; significant exceptions |
+
+**Example — Effective:**
+> *"Based on our assessment, the technology risk controls implemented by [FI] for cloud identity and access management are effective in meeting the expectations outlined in Appendix 7 Part D Item 1(a). Access controls are adequately designed with least-privilege enforcement, multi-factor authentication, and regular access reviews."*
+
+**Example — Partially Effective:**
+> *"Based on our assessment, the technology risk controls implemented by [FI] for cloud identity and access management are partially effective. While multi-factor authentication is enforced for interactive access, we noted overly permissive IAM policies for 4 service accounts and root account usage for non-emergency purposes (Finding F-001). These gaps reduce the effectiveness of access controls in mitigating unauthorised access risk."*
+
+**Example — Ineffective:**
+> *"Based on our assessment, the technology risk controls for cloud identity and access management are ineffective. No centralised IAM governance exists, privileged access is not managed through a PAM solution, access reviews have not been conducted, and multiple accounts have unrestricted administrative privileges without MFA."*
+
+### 2. Negative Attestation — What It Means
+
+BNM's exact wording (Part C point 5):
+
+> *"The Risk Assessment Report shall confirm there is no exception noted based on the prescribed risk areas (Negative attestation)."*
+
+A **negative attestation** is a specific form of professional assurance. Instead of the IESP positively stating *"the controls are adequate"*, the IESP states *"nothing has come to our attention that indicates the controls do not meet expectations"* — or identifies specific exceptions where they do.
+
+There are three possible outcomes:
+
+#### Option A — Clean (No Exceptions)
+
+> *"Based on our assessment of the technology risk controls implemented by [FI] against the prescribed risk areas in Appendix 7 Part D and paragraph 17.1, nothing has come to our attention that causes us to believe that the controls are not effective in meeting the expectations outlined therein. No exceptions were noted."*
+
+**When to use:** All Part D control areas assessed as Effective. No material findings. This is the ideal outcome but relatively uncommon for first-time engagements.
+
+#### Option B — With Exceptions
+
+> *"Based on our assessment of the technology risk controls implemented by [FI] against the prescribed risk areas in Appendix 7 Part D and paragraph 17.1, nothing has come to our attention that causes us to believe that the controls are not effective, except for the following areas where exceptions were noted:*
+>
+> *1. Part D Item 1(a) — Access Control: Overly permissive IAM policies and root account usage gaps (Finding F-001, rated High)*
+> *2. Part D Item 1(e) — Incident Management: Incomplete cloud audit logging and SIEM integration (Finding F-002, rated High)*
+> *3. Appendix 10 Part B Area 13 — Exit Strategy: Untested and incomplete cloud exit strategy (Finding F-003, rated High)*
+>
+> *These exceptions should be remediated prior to production deployment. Subject to satisfactory remediation of the above, the overall control environment is expected to meet Part D expectations."*
+
+**When to use:** Most Part D areas are Effective but material exceptions exist. This is the most common real-world outcome — the FI has done reasonable work but gaps remain.
+
+#### Option C — Adverse
+
+> *"Based on our assessment, we are unable to confirm that the technology risk controls implemented by [FI] meet the expectations outlined in Appendix 7 Part D and paragraph 17.1. Material exceptions were noted across multiple prescribed risk areas, including [list areas]. In our assessment, the control environment is not effective in mitigating technology risk in its current state. We recommend that the FI defer the planned deployment until the identified control gaps are remediated and independently re-assessed."*
+
+**When to use:** Fundamental control failures across multiple areas. The IESP cannot support the FI proceeding. This is rare but must be issued when warranted — the IESP's professional obligation overrides commercial considerations.
+
+### 3. Overall Recommendation (Section 5)
+
+This is the IESP's recommendation to the FI's board and to BNM. It is separate from the negative attestation and provides actionable guidance:
+
+| Recommendation | Meaning | Typical Scenario |
+|---------------|---------|-----------------|
+| **Recommend** | Proceed with deployment/launch | Option A attestation; no material findings |
+| **Recommend with Conditions** | Proceed, but specific conditions must be met before/after go-live | Option B attestation; high findings that are remediable within a reasonable timeframe |
+| **Do Not Recommend** | Do not proceed until fundamental gaps are addressed | Option C attestation; control environment is not ready |
+
+**Example — Recommend with Conditions:**
+> *"We recommend that Bank Perdana Berhad proceed with the cloud migration of Temenos T24 to AWS, subject to the following conditions:*
+> *1. Remediate Finding F-001 (IAM governance gaps) prior to production go-live*
+> *2. Complete SIEM integration for all cloud log sources per Finding F-002 prior to production go-live*
+> *3. Enhance and test the cloud exit strategy per Finding F-003 within 90 days of production go-live"*
+
+### How These Three Components Work Together
+
+```
+Section 4: Technology Risk Assessment
+  → Per-area effectiveness ratings for each Part D control area
+  → Identifies WHERE controls are effective / partially effective / ineffective
+
+Part C.5: Negative Attestation
+  → Formal attestation statement with or without exceptions
+  → Identifies WHAT exceptions exist against prescribed risk areas
+
+Section 5: Overall Recommendation
+  → Actionable recommendation (Recommend / Recommend with Conditions / Do Not Recommend)
+  → Identifies WHAT SHOULD HAPPEN next — conditions, timelines, actions
+```
+
+The board and BNM read all three together. A "Partially Effective" assessment with "Option B — Exceptions Noted" and "Recommend with Conditions" gives a complete picture: controls mostly work, specific gaps exist, and here's what must be done.
+
+### Common Mistakes to Avoid
+
+| Mistake | Why It's Wrong | Correct Approach |
+|---------|---------------|-----------------|
+| Concluding "Compliant" or "Non-compliant" | The IESP assesses effectiveness, not compliance. Compliance is BNM's determination | Use "Effective / Partially Effective / Ineffective" |
+| Issuing a clean attestation despite material findings | Undermines the integrity of the negative attestation and the IESP's independence | If material findings exist, use Option B or C |
+| Using "Pass/Fail" as the overall conclusion | Oversimplifies the assessment; BNM expects nuanced assurance | Rate effectiveness per control area; use negative attestation with specific exceptions |
+| Conflating the negative attestation with the recommendation | These serve different purposes — one is a statement of fact, the other is professional advice | Keep them separate: attestation states what was found; recommendation states what should happen |
+| Rating everything "Effective" to satisfy the FI | Professional obligation requires honest assessment; BNM reviews these reports | Rate based on evidence; document the basis for each rating |
+
+### For a Worked Example
+
+See [examples/bank-perdana-cloud/](examples/bank-perdana-cloud/) for a complete end-to-end example showing how effectiveness ratings, negative attestation, and the overall recommendation are applied in practice across all engagement documents.
+
+---
 
 ## How to Use This Toolkit
 
