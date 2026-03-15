@@ -18,16 +18,54 @@
   let currentSection = 'overview';
   let decisionPath = [];
 
+  // Caching layer
+  var cache = new Map();
+
   // Load data
   async function loadJSON(path) {
+    if (cache.has(path)) return cache.get(path);
     try {
-      const res = await fetch(path);
-      if (!res.ok) throw new Error(`Failed to load ${path}`);
-      return await res.json();
+      var res = await fetch(path);
+      if (!res.ok) throw new Error(res.status);
+      var data = await res.json();
+      cache.set(path, data);
+      return data;
     } catch (e) {
-      console.error(e);
+      console.error('Failed to load ' + path, e);
       return null;
     }
+  }
+
+  // Visual error handler
+  function renderError(msg) {
+    return '<div class="error-state"><h3>Error</h3><p>' + msg + '</p></div>';
+  }
+
+  // HTML escape utility
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // Export functions
+  function exportToPDF() {
+    window.print();
+  }
+
+  function exportToCSV() {
+    var rows = [['Domain', 'Part D Ref', 'Description']];
+    if (window._controlDomains && window._controlDomains.domains) {
+      window._controlDomains.domains.forEach(function(d) {
+        rows.push([d.name, d.partDRef || d.appendixRef || '', d.description]);
+      });
+    }
+    var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n');
+    var blob = new Blob([csv], { type: 'text/csv' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'iesp-controls.csv';
+    a.click();
   }
 
   async function init() {
@@ -38,6 +76,9 @@
       loadJSON('artifacts/inventory.json'),
       loadJSON('controls/control-mapping.json'),
     ]);
+
+    // Store control domains globally for export
+    if (controlDomains) window._controlDomains = controlDomains;
 
     // Nav handling
     $$('.nav-link').forEach(link => {
@@ -64,6 +105,25 @@
     // Initial render
     const hash = location.hash.replace('#', '') || 'overview';
     navigateTo(hash);
+
+    // Dark mode
+    var darkToggle = document.createElement('button');
+    darkToggle.className = 'dark-toggle';
+    darkToggle.setAttribute('aria-label', 'Toggle dark mode');
+    darkToggle.textContent = '\u{1F319}';
+    darkToggle.onclick = function() {
+      document.body.classList.toggle('dark');
+      var isDark = document.body.classList.contains('dark');
+      localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+      darkToggle.textContent = isDark ? '\u{2600}\u{FE0F}' : '\u{1F319}';
+    };
+    var headerEl = document.querySelector('.header-controls') || document.querySelector('header');
+    if (headerEl) headerEl.appendChild(darkToggle);
+    // Restore preference
+    if (localStorage.getItem('darkMode') === 'on' || (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark');
+      darkToggle.textContent = '\u{2600}\u{FE0F}';
+    }
   }
 
   function navigateTo(section) {

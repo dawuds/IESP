@@ -1,4 +1,10 @@
 {
+  "_source": {
+    "sourceDocument": "BNM RMiT Appendix 7 Part D",
+    "sourceVersion": "Nov 2025 revision",
+    "sourceDate": "2025-11-28",
+    "sourceURL": ""
+  },
   "version": "1.0.0",
   "source": "BNM RMiT Nov 2025 - Appendix 7 Part D",
   "domains": [
@@ -6,7 +12,13 @@
       "id": "access-control",
       "name": "Access Control",
       "description": "Authentication, authorisation, privilege management, segregation of duties, and access review",
-      "rmitClauses": ["10.53", "10.54", "10.55", "10.56", "10.57"],
+      "rmitClauses": [
+        "10.53",
+        "10.54",
+        "10.55",
+        "10.56",
+        "10.57"
+      ],
       "partDRef": "1(a)",
       "subControls": [
         "Customer identity authentication and transaction authorisation",
@@ -26,21 +38,49 @@
       "id": "physical-environmental-security",
       "name": "Physical and Environmental Security",
       "description": "Data centre physical access, environmental controls, and infrastructure redundancy",
-      "rmitClauses": ["10.24", "10.25", "10.26", "10.27", "10.28"],
+      "rmitClauses": [
+        "10.24",
+        "10.25",
+        "10.26",
+        "10.27",
+        "10.28"
+      ],
       "partDRef": "1(b)"
     },
     {
       "id": "operations-security",
       "name": "Operations Security",
       "description": "IT operations, change management, patching, capacity, backup and restoration",
-      "rmitClauses": ["10.4", "10.5", "10.7", "10.8", "10.11", "10.17", "10.18", "10.29", "10.30", "10.44", "10.45"],
+      "rmitClauses": [
+        "10.4",
+        "10.5",
+        "10.7",
+        "10.8",
+        "10.11",
+        "10.17",
+        "10.18",
+        "10.29",
+        "10.30",
+        "10.44",
+        "10.45"
+      ],
       "partDRef": "1(c)"
     },
     {
       "id": "communication-security",
       "name": "Communication Security",
       "description": "Network security, encryption, data integrity, and secure communication channels",
-      "rmitClauses": ["10.20", "10.21", "10.22", "10.23", "10.36", "10.37", "10.39", "10.40", "10.41"],
+      "rmitClauses": [
+        "10.20",
+        "10.21",
+        "10.22",
+        "10.23",
+        "10.36",
+        "10.37",
+        "10.39",
+        "10.40",
+        "10.41"
+      ],
       "partDRef": "1(d)",
       "subControls": [
         "End-to-end encryption for external communication",
@@ -57,21 +97,46 @@
       "id": "incident-management",
       "name": "Information Security Incident Management",
       "description": "Incident response, detection, containment, recovery, and post-incident review",
-      "rmitClauses": ["11.8", "11.9", "11.10", "11.11", "11.12", "11.13", "11.14"],
+      "rmitClauses": [
+        "11.8",
+        "11.9",
+        "11.10",
+        "11.11",
+        "11.12",
+        "11.13",
+        "11.14"
+      ],
       "partDRef": "1(e)"
     },
     {
       "id": "business-continuity",
       "name": "Information Security Aspects of Business Continuity Management",
       "description": "BCP, DR, resilience, and recovery capabilities",
-      "rmitClauses": ["10.31", "10.32", "10.34", "10.35", "10.44", "10.45"],
+      "rmitClauses": [
+        "10.31",
+        "10.32",
+        "10.34",
+        "10.35",
+        "10.44",
+        "10.45"
+      ],
       "partDRef": "1(f)"
     },
     {
       "id": "online-transaction-security",
       "name": "Online Transaction and Services Security",
       "description": "Digital services security controls for online transactions",
-      "rmitClauses": ["12.1", "12.2", "12.3", "12.4", "12.5", "12.6", "12.7", "12.8", "12.9"],
+      "rmitClauses": [
+        "12.1",
+        "12.2",
+        "12.3",
+        "12.4",
+        "12.5",
+        "12.6",
+        "12.7",
+        "12.8",
+        "12.9"
+      ],
       "partDRef": "2",
       "subControls": [
         "Transaction authentication and non-repudiation",
@@ -137,15 +202,37 @@
       "riskCategories": [
         {
           "category": "Operational performance and capacity",
-          "areas": ["Staff competency", "Bench strength", "Key-man risks", "System infrastructure reliability", "IT operations management", "Service quality", "Recovery and resumption capability"]
+          "areas": [
+            "Staff competency",
+            "Bench strength",
+            "Key-man risks",
+            "System infrastructure reliability",
+            "IT operations management",
+            "Service quality",
+            "Recovery and resumption capability"
+          ]
         },
         {
           "category": "Security requirements",
-          "areas": ["Security governance", "IT asset management", "Logical data segregation", "Secure SDLC", "Physical security", "Personnel security", "Access management", "Incident management"]
+          "areas": [
+            "Security governance",
+            "IT asset management",
+            "Logical data segregation",
+            "Secure SDLC",
+            "Physical security",
+            "Personnel security",
+            "Access management",
+            "Incident management"
+          ]
         },
         {
           "category": "Cyber supply chain risks",
-          "areas": ["Personnel vetting", "Third-party/open-source software vetting", "Sub-contractor risk management", "Concentration and geopolitical risk"]
+          "areas": [
+            "Personnel vetting",
+            "Third-party/open-source software vetting",
+            "Sub-contractor risk management",
+            "Concentration and geopolitical risk"
+          ]
         }
       ]
     }
