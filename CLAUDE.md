@@ -3,7 +3,10 @@
 **Last updated:** 2026-03-25
 
 ## What This Is
-Structured knowledge base and audit work programs for BNM RMiT Internet and Electronic Services Provision (IESP) assessments. SPA explorer with JSON data and markdown audit procedures.
+Structured knowledge base and audit work programs for BNM RMiT Independent External Service Provider (IESP) assessments. SPA explorer with JSON data and markdown audit procedures. **Tier 1 Focus Area** in the GRC portfolio.
+
+## Portfolio Role
+One of 5 Tier 1 focus areas. Practitioner-focused toolkit for conducting IESP assessments under BNM RMiT Appendix 7. Content is currently markdown-heavy — JSON-ification of engagements and evidence checklists is a priority.
 
 ## Architecture
 - **SPA**: `index.html` + `app.js` + `style.css` (vanilla JS, no build step)
@@ -24,7 +27,16 @@ Structured knowledge base and audit work programs for BNM RMiT Internet and Elec
 - IESP classification (Appendix 7) determines assessment scope — misclassification affects entire audit
 - Decision tree logic must match current BNM RMiT Appendix 7 requirements
 
-## Related Repos
+## Validation
+```bash
+node validate.js
+```
 
-- [RMIT](https://github.com/dawuds/RMIT) — Parent RMiT framework
-- [cybercompliance](https://github.com/dawuds/cybercompliance) — Regulatory source documents
+## Related Repos
+- [RMIT](https://github.com/dawuds/RMIT) — Parent RMiT framework (121 clauses)
+- [nacsa](https://github.com/dawuds/nacsa) — NACSA Act 854; IESP engagements may interact with NCII obligations (Tier 1)
+- [pdpa-my](https://github.com/dawuds/pdpa-my) — PDPA data protection overlaps with IESP assessment scope (Tier 1)
+- [AI-Governance](https://github.com/dawuds/AI-Governance) — AI/emerging tech is an IESP engagement type (Tier 1)
+- [sc-gtrm](https://github.com/dawuds/sc-gtrm) — Parallel assessment framework for capital markets (Tier 1)
+- [Tech-Audit](https://github.com/dawuds/Tech-Audit) — Audit methodology; IESP domain planned (Tier 2)
+- [grc](https://github.com/dawuds/grc) — Portfolio hub
