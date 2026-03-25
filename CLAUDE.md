@@ -1,5 +1,7 @@
 # IESP — BNM RMiT IESP Audit Work Programs
 
+**Last updated:** 2026-03-25
+
 ## What This Is
 Structured knowledge base and audit work programs for BNM RMiT Internet and Electronic Services Provision (IESP) assessments. SPA explorer with JSON data and markdown audit procedures.
 
@@ -23,5 +25,6 @@ Structured knowledge base and audit work programs for BNM RMiT Internet and Elec
 - Decision tree logic must match current BNM RMiT Appendix 7 requirements
 
 ## Related Repos
-- `RMIT/` — Parent RMiT framework
-- `cybercompliance/reference/nacsa/` — Regulatory source documents
+
+- [RMIT](https://github.com/dawuds/RMIT) — Parent RMiT framework
+- [cybercompliance](https://github.com/dawuds/cybercompliance) — Regulatory source documents
