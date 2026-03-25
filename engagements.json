@@ -1,0 +1,300 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-03-26",
+    "source": "BNM RMiT (BNM/RH/PD 028-98, 28 Nov 2025), Appendix 7",
+    "sourceType": "official-paraphrase",
+    "description": "Structured engagement types for BNM RMiT IESP assessments"
+  },
+  "engagementTypes": [
+    {
+      "id": "dcra",
+      "name": "Data Centre Resilience Assessment",
+      "shortName": "DCRA",
+      "triggerClauses": ["14.1"],
+      "scopeClauses": ["10.24", "10.25", "10.26", "10.27", "10.28"],
+      "appendixScope": null,
+      "frequency": "Every 3 years OR material change to DC infrastructure",
+      "boardDeliberationRequired": true,
+      "boardDeliberationClause": "8.3",
+      "bnmConsultationRequired": false,
+      "triggerConditions": [
+        "Last DCRA completed more than 36 months ago",
+        "Material change to DC infrastructure (relocation, major structural modifications, power/cooling changes, tier classification change, capacity expansion, physical security system changes, owned-to-third-party transition, consolidation/decommissioning)",
+        "BNM direction under para 1.4 or 17.4"
+      ],
+      "scopeDomains": [
+        "DC resilience and availability objectives",
+        "Redundancy and single points of failure (power, cooling, network, storage)",
+        "Physical security and environmental controls",
+        "Data centre operations",
+        "Segregation and isolation (production/non-production, tenant segregation)"
+      ],
+      "reportingRequirements": ["App7-PartA", "App7-PartC", "App7-PartD"],
+      "workProgramFile": "audit-work-programs/awp-dcra.md",
+      "baselineWorkProgram": "audit-work-programs/awp-appendix-7-part-d.md",
+      "evidenceChecklistFile": "evidence/evidence-checklist-dcra.md",
+      "requirementsFile": "requirements/dcra-requirements.md",
+      "controlDomains": ["physical-environmental-security", "operations-security", "business-continuity"]
+    },
+    {
+      "id": "nra",
+      "name": "Network Resilience Assessment",
+      "shortName": "NRA",
+      "triggerClauses": ["14.2"],
+      "scopeClauses": ["10.36", "10.37", "10.38", "10.39", "10.40", "10.41", "10.42", "10.43"],
+      "appendixScope": null,
+      "frequency": "Every 3 years OR material network change",
+      "boardDeliberationRequired": true,
+      "boardDeliberationClause": "8.3",
+      "bnmConsultationRequired": false,
+      "triggerConditions": [
+        "Last NRA completed more than 36 months ago",
+        "Material network design change (core topology redesign, new network zones, WAN architecture changes, internet edge changes, security control changes, DC network redesign, remote access architecture changes, business unit integration, cloud connectivity migration, new communication channels)",
+        "BNM direction under para 1.4 or 17.4"
+      ],
+      "scopeDomains": [
+        "Network design and architecture",
+        "Network resilience and reliability (redundancy, failover, DR, carrier management)",
+        "Network monitoring and traffic analysis",
+        "Network security controls (firewall, IDS/IPS, WAF, DDoS, NAC, VPN, wireless, API gateway)",
+        "Network segmentation (zones, DMZ, microsegmentation, third-party isolation)",
+        "Network change management",
+        "Network logging and auditing",
+        "Network incident response"
+      ],
+      "reportingRequirements": ["App7-PartA", "App7-PartC", "App7-PartD"],
+      "workProgramFile": "audit-work-programs/awp-nra.md",
+      "baselineWorkProgram": "audit-work-programs/awp-appendix-7-part-d.md",
+      "evidenceChecklistFile": "evidence/evidence-checklist-nra.md",
+      "requirementsFile": "requirements/nra-requirements.md",
+      "controlDomains": ["network-security", "operations-security", "incident-management"]
+    },
+    {
+      "id": "cloud-pre-implementation",
+      "name": "Cloud Services Pre-Implementation Review",
+      "shortName": "Cloud Pre-Impl",
+      "triggerClauses": ["17.1"],
+      "scopeClauses": ["10.50", "10.51", "10.52"],
+      "appendixScope": "Appendix 10 (Part A: 7 governance areas, Part B: 14 design/control areas)",
+      "frequency": "First-time adoption of public cloud for critical systems",
+      "boardDeliberationRequired": true,
+      "boardDeliberationClause": "8.3",
+      "bnmConsultationRequired": true,
+      "prerequisites": [
+        "Comprehensive FI risk assessment covering Appendix 10 Part A and Part B",
+        "CISO/board chair signed confirmation (Appendix 7 Part B attestation)",
+        "Independent external pre-implementation review (this IESP engagement)"
+      ],
+      "triggerConditions": [
+        "First-time adoption of public cloud for critical systems",
+        "First-time use of materially different cloud deployment model for critical systems",
+        "BNM direction under para 17.4"
+      ],
+      "scopeDomains": [
+        "Cloud strategy and governance (App10 Part A: 7 areas)",
+        "Architecture design and security zones",
+        "Identity and access management",
+        "Data protection (encryption, KMS, DLP, residency)",
+        "Network security (VPC, security groups, private connectivity)",
+        "Compute and storage security",
+        "Logging, monitoring, and vulnerability management",
+        "Change management and CI/CD security",
+        "Incident response and BCP/DR",
+        "Vendor management and exit strategy",
+        "Regulatory compliance (data residency, BNM access, PDPA)"
+      ],
+      "reportingRequirements": ["App7-PartA", "App7-PartB", "App7-PartC", "App7-PartD"],
+      "workProgramFile": "audit-work-programs/awp-cloud.md",
+      "baselineWorkProgram": "audit-work-programs/awp-appendix-7-part-d.md",
+      "evidenceChecklistFile": "evidence/evidence-checklist-cloud.md",
+      "requirementsFile": "requirements/cloud-pre-implementation.md",
+      "controlDomains": ["access-control", "data-protection", "cloud-governance", "network-security", "incident-management", "business-continuity"]
+    },
+    {
+      "id": "emerging-tech-pre-implementation",
+      "name": "Emerging Technology Pre-Implementation Review",
+      "shortName": "Emerging Tech",
+      "triggerClauses": ["17.1"],
+      "scopeClauses": ["9.2"],
+      "appendixScope": "Appendix 9 (5 assessment areas: governance, risk assessment, acceptance criteria, controls, production prerequisites)",
+      "frequency": "First-time production deployment of emerging technology for critical systems",
+      "boardDeliberationRequired": true,
+      "boardDeliberationClause": "8.3",
+      "bnmConsultationRequired": true,
+      "prerequisites": [
+        "Comprehensive FI risk assessment covering Appendix 9 areas",
+        "CISO/board chair signed confirmation (Appendix 7 Part B attestation)",
+        "Independent external pre-implementation review (this IESP engagement)"
+      ],
+      "triggerConditions": [
+        "First-time production deployment of emerging technology",
+        "Material expansion (pilot to enterprise-wide, non-critical to critical)",
+        "Material change in risk profile of existing deployment",
+        "Periodic review (at least every 3 years)",
+        "BNM direction under para 1.4 or 17.4"
+      ],
+      "emergingTechnologies": [
+        "AI/ML (LLMs, generative AI, predictive analytics, RPA with cognitive capabilities)",
+        "Distributed Ledger Technology (blockchain, tokenisation, smart contracts)",
+        "Quantum Computing (quantum-resistant cryptography, quantum applications)",
+        "Internet of Things (connected devices, smart ATMs, wearable payments)",
+        "Advanced Analytics (real-time streaming, alternative data, graph analytics)",
+        "Immersive Technologies (VR, AR for customer engagement)",
+        "Autonomous Systems (algorithmic trading, automated underwriting)"
+      ],
+      "scopeDomains": [
+        "Governance arrangements (board approval, framework, policies, ethical principles)",
+        "Risk assessment (technology-specific, model risk, concentration, obsolescence)",
+        "Acceptance criteria (go-live, performance thresholds, security baseline, ethical assessment)",
+        "Controls (security, access, monitoring, human oversight, kill switch, change management)",
+        "Production prerequisites (security testing, resilience testing, operational readiness)"
+      ],
+      "aiMlSpecificAreas": [
+        "Model governance (inventory, ownership, validation, approval)",
+        "Data governance (training data quality, bias, lineage, consent)",
+        "Explainability (proportionate to risk of use case)",
+        "Bias and fairness (protected characteristics, fairness metrics)",
+        "Model drift (accuracy drift, data drift, retraining triggers)",
+        "Adversarial robustness (prompt injection, jailbreaking, data exfiltration)",
+        "Transparency (customer notification, AI-generated content labeling)",
+        "Human override (decision override, appeal/review process)"
+      ],
+      "reportingRequirements": ["App7-PartA", "App7-PartB", "App7-PartC", "App7-PartD"],
+      "workProgramFile": "audit-work-programs/awp-ai-emerging-tech.md",
+      "baselineWorkProgram": "audit-work-programs/awp-appendix-7-part-d.md",
+      "evidenceChecklistFile": "evidence/evidence-checklist-ai.md",
+      "requirementsFile": "requirements/emerging-tech-review.md",
+      "controlDomains": ["access-control", "operations-security", "incident-management", "business-continuity"]
+    },
+    {
+      "id": "digital-services-enhancement",
+      "name": "Digital Services Enhancement Assurance",
+      "shortName": "Digital Services",
+      "triggerClauses": ["16.4", "16.5"],
+      "scopeClauses": ["12.1", "12.2", "12.3", "12.4", "12.5", "12.6", "12.7", "12.8", "12.9"],
+      "appendixScope": "Appendix 7 Part D items 1(a-f) and 2(a-e)",
+      "frequency": "Prior to launch of new or materially enhanced digital services",
+      "boardDeliberationRequired": false,
+      "bnmConsultationRequired": false,
+      "triggerConditions": [
+        "Digital services enhancement does not meet simplified notification criteria (Appendix 6)",
+        "New digital service launch requiring IESP assessment"
+      ],
+      "scopeDomains": [
+        "Access control (user registration, provisioning, privilege management)",
+        "Physical and environmental security",
+        "Operations security",
+        "Communications security",
+        "Incident management",
+        "Business continuity",
+        "Customer authentication (MFA, session management, account lockout)",
+        "Transaction security (authentication, authorisation, fraud monitoring, encryption)",
+        "API security and secure development",
+        "Mobile device security",
+        "Card-based security (if applicable)"
+      ],
+      "reportingRequirements": ["App7-PartA", "App7-PartD"],
+      "workProgramFile": "audit-work-programs/awp-digital-services.md",
+      "baselineWorkProgram": "audit-work-programs/awp-appendix-7-part-d.md",
+      "evidenceChecklistFile": "evidence/evidence-checklist-digital.md",
+      "controlDomains": ["access-control", "operations-security", "communications-security", "incident-management", "business-continuity", "online-transactions", "mobile-security"]
+    },
+    {
+      "id": "subsequent-cloud-notification",
+      "name": "Subsequent Cloud/Emerging Tech Notification",
+      "shortName": "Subsequent Notification",
+      "triggerClauses": ["17.2"],
+      "scopeClauses": ["10.50", "10.51", "10.52"],
+      "appendixScope": "Appendix 10 and/or Appendix 9 (as applicable)",
+      "frequency": "Each subsequent adoption of cloud/emerging tech for critical systems",
+      "boardDeliberationRequired": false,
+      "bnmConsultationRequired": false,
+      "prerequisites": [
+        "Prior 17.1 consultation completed with no BNM concerns",
+        "Enhanced TRMF for cloud/emerging tech in place",
+        "Independent assurance on the enhanced framework (IESP required)",
+        "Sufficient incident response plans"
+      ],
+      "triggerConditions": [
+        "Material alteration to prior assessments/representations to BNM",
+        "Subsequent cloud or emerging technology adoption for critical systems"
+      ],
+      "exemptionClause": "17.3 — enhancements that do NOT materially alter risk profile (FI must document materiality determination)",
+      "reportingRequirements": ["App7-PartA", "App7-PartB"],
+      "workProgramFile": "audit-work-programs/awp-cloud.md",
+      "baselineWorkProgram": "audit-work-programs/awp-appendix-7-part-d.md",
+      "controlDomains": ["cloud-governance", "access-control", "data-protection"]
+    },
+    {
+      "id": "bnm-directed",
+      "name": "BNM Discretionary Direction Review",
+      "shortName": "BNM Directed",
+      "triggerClauses": ["17.4", "1.4"],
+      "scopeClauses": [],
+      "appendixScope": "As directed by BNM",
+      "frequency": "As directed by BNM",
+      "boardDeliberationRequired": true,
+      "boardDeliberationClause": "8.3",
+      "bnmConsultationRequired": false,
+      "triggerConditions": [
+        "BNM identifies material technology risk management weaknesses (para 1.4)",
+        "BNM issues directive (para 17.4)",
+        "Typically after supervisory examinations, incident escalations, or thematic reviews"
+      ],
+      "reportingRequirements": ["As directed by BNM"],
+      "controlDomains": []
+    }
+  ],
+  "universalBaseline": {
+    "id": "appendix-7-part-d",
+    "name": "Appendix 7 Part D — Minimum Controls",
+    "appliesTo": "ALL IESP engagements",
+    "workProgramFile": "audit-work-programs/awp-appendix-7-part-d.md",
+    "securityRequirements": [
+      {"ref": "1(a)", "area": "Access Control"},
+      {"ref": "1(b)", "area": "Physical and Environmental Security"},
+      {"ref": "1(c)", "area": "Operations Security"},
+      {"ref": "1(d)", "area": "Communications Security"},
+      {"ref": "1(e)", "area": "Incident Management"},
+      {"ref": "1(f)", "area": "Business Continuity"}
+    ],
+    "onlineTransactionRequirements": [
+      {"ref": "2(a)", "area": "Access Control (customer authentication, MFA, session management)"},
+      {"ref": "2(b)", "area": "Online Transaction Security (authentication, fraud monitoring, encryption)"},
+      {"ref": "2(c)", "area": "API Security and Secure Development"},
+      {"ref": "2(d)", "area": "Mobile Device Security"},
+      {"ref": "2(e)", "area": "Card-Based Security"}
+    ]
+  },
+  "reportingFormats": {
+    "App7-PartA": {
+      "name": "Risk Assessment Report",
+      "description": "FI details, ESP details, application details, technology risk assessment, QA, authorised signatory",
+      "templateFile": "templates/risk-assessment-report.md"
+    },
+    "App7-PartB": {
+      "name": "Confirmation Letter",
+      "description": "9-point attestation by CISO/board chair confirming risk assessment, control adequacy, and readiness",
+      "templateFile": "templates/confirmation-letter.md"
+    },
+    "App7-PartC": {
+      "name": "IESP Compliance Statement",
+      "description": "ESP's negative attestation on control effectiveness. Options: A (clean), B (with exceptions), C (adverse)",
+      "templateFile": "templates/findings-report.md"
+    },
+    "App7-PartD": {
+      "name": "Minimum Controls Attestation",
+      "description": "Negative attestation on Appendix 7 Part D minimum control requirements",
+      "templateFile": "templates/findings-report.md"
+    }
+  },
+  "evidenceHierarchy": [
+    {"rank": 1, "type": "Direct observation", "description": "ESP directly observes control in operation"},
+    {"rank": 2, "type": "Independent confirmation", "description": "Third-party evidence (SOC 2, CSP certifications)"},
+    {"rank": 3, "type": "System-generated", "description": "Logs, configurations without manual intervention"},
+    {"rank": 4, "type": "Re-performance", "description": "ESP re-performs control procedure"},
+    {"rank": 5, "type": "Documentary", "description": "Policies, procedures, meeting minutes"},
+    {"rank": 6, "type": "Inquiry", "description": "Verbal representations from FI personnel"}
+  ]
+}
