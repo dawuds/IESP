@@ -1,12 +1,15 @@
 # IESP — BNM RMiT IESP Audit Work Programs
 
-**Last updated:** 2026-03-25
+**Last updated:** 2026-03-26
 
 ## What This Is
 Structured knowledge base and audit work programs for BNM RMiT Independent External Service Provider (IESP) assessments. SPA explorer with JSON data and markdown audit procedures. **Tier 1 Focus Area** in the GRC portfolio.
 
 ## Portfolio Role
 One of 5 Tier 1 focus areas. Practitioner-focused toolkit for conducting IESP assessments under BNM RMiT Appendix 7. Content is currently markdown-heavy — JSON-ification of engagements and evidence checklists is a priority.
+
+## Quick Start
+Open `index.html` in a browser. Run `node validate.js` to check data integrity. See `engagements.json` for structured engagement type data.
 
 ## Architecture
 - **SPA**: `index.html` + `app.js` + `style.css` (vanilla JS, no build step)

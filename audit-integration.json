@@ -1,0 +1,167 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-03-26",
+    "source": "BNM RMiT Appendix 7 (Nov 2025)",
+    "techAuditDomain": "IESP",
+    "techAuditPath": "Tech-Audit/IESP/",
+    "description": "Maps IESP control domains to Tech-Audit/IESP QA procedures. The Tech-Audit/IESP domain audits the quality of IESP assessments — it does not perform the IESP assessment itself."
+  },
+  "domainMappings": [
+    {
+      "domainId": "access-control",
+      "domainName": "Access Control",
+      "partDRef": "1(a)",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "MC-01", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Access control is a Part D (Cybersecurity) domain — QA procedures verify whether the IESP assessed this domain with adequate scope (SD-01, SD-02), methodology (MC-01), evidence (FQ-01, FQ-02), and reporting (RQ-01). Engagement acceptance procedures (EA-01 to EA-03) apply universally.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "physical-environmental-security",
+      "domainName": "Physical and Environmental Security",
+      "partDRef": "1(b)",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "MC-01", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Physical security assessment quality is verified through the same QA procedures — scoping (SD), methodology (MC), fieldwork (FQ), and reporting (RQ).",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "operations-security",
+      "domainName": "Operations Security",
+      "partDRef": "1(c)",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "SD-03", "MC-01", "MC-04", "FQ-01", "FQ-02", "FQ-03", "RQ-01"],
+      "rationale": "Operations security covers multiple RMiT clauses (10.4-10.45) — risk-based scoping (SD-03) and approach selection (MC-04) are critical for ensuring the IESP prioritised the most relevant sub-areas.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "communication-security",
+      "domainName": "Communication Security",
+      "partDRef": "1(d)",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "MC-01", "MC-04", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Communication security includes encryption and network controls that require technical testing — MC-04 (approach selection) verifies the IESP did not rely solely on interviews for these technical areas.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "incident-management",
+      "domainName": "Information Security Incident Management",
+      "partDRef": "1(e)",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "MC-01", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Incident management assessment quality is verified through standard QA procedures across all 7 domains.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "business-continuity",
+      "domainName": "Information Security Aspects of Business Continuity Management",
+      "partDRef": "1(f)",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "SD-03", "MC-01", "MC-04", "FQ-01", "FQ-02", "RQ-01", "RQ-02"],
+      "rationale": "BCP/DR assessment involves risk-based scoping (SD-03) and requires appropriate approach selection (MC-04). Conclusion methodology (RQ-02) is critical for assessing resilience posture.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "online-transaction-security",
+      "domainName": "Online Transaction and Services Security",
+      "partDRef": "2",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "SD-03", "MC-01", "MC-04", "FQ-01", "FQ-02", "FQ-03", "RQ-01", "RQ-03"],
+      "rationale": "Online transaction security is customer-facing with high regulatory visibility — attestation accuracy (RQ-03) is particularly relevant as this Part often forms the basis for negative attestation.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "cloud-governance",
+      "domainName": "Cloud Governance and Controls",
+      "appendixRef": "Appendix 10",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "SD-03", "MC-01", "MC-02", "MC-04", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Cloud governance is governed by Appendix 10 and requires assessors with cloud-specific competency — MC-02 (professional standards compliance) ensures the methodology addresses this specialised area.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "emerging-technology",
+      "domainName": "Emerging Technology Controls",
+      "appendixRef": "Appendix 9",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "SD-03", "MC-01", "MC-02", "MC-04", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Emerging technology (AI/ML) assessment requires specialised assessor competency (EA-02 verifies domain expertise) and risk-based scoping (SD-03) to identify applicable AI deployments.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    },
+    {
+      "domainId": "third-party-risks",
+      "domainName": "Third-Party IT and Cyber Risks",
+      "appendixRef": "Appendix 8",
+      "qaProcedureRefs": ["EA-01", "EA-02", "EA-03", "SD-01", "SD-02", "SD-03", "MC-01", "MC-04", "FQ-01", "FQ-02", "RQ-01"],
+      "rationale": "Third-party risk assessment requires risk-based scoping (SD-03) to focus on critical service providers and appropriate assessment approaches (MC-04) for supply chain controls.",
+      "workProgramFile": "Tech-Audit/IESP/Work-Program/IESP-Quality-Assurance-Program.md"
+    }
+  ],
+  "crossCuttingProcedures": {
+    "description": "These QA procedures apply across all IESP control domains — they assess the overall engagement quality rather than domain-specific content.",
+    "procedures": [
+      {
+        "ref": "EA-04",
+        "name": "Engagement quality control",
+        "scope": "Verifies IESP firm-level quality management applies to the entire engagement"
+      },
+      {
+        "ref": "MC-03",
+        "name": "NACSA/CE Directive methodology alignment",
+        "scope": "Applies only when the assessed institution is also an NCII entity under the Cyber Security Act 2024"
+      },
+      {
+        "ref": "FQ-03",
+        "name": "Workpaper quality and documentation standards",
+        "scope": "Verifies workpaper quality across all domains assessed"
+      },
+      {
+        "ref": "FQ-04",
+        "name": "Timeliness and completeness of fieldwork",
+        "scope": "Verifies all planned procedures were completed within the engagement timeline"
+      },
+      {
+        "ref": "RQ-02",
+        "name": "Conclusion methodology and basis",
+        "scope": "Verifies the overall conclusion methodology is transparent and consistently applied"
+      },
+      {
+        "ref": "RQ-03",
+        "name": "Negative attestation accuracy",
+        "scope": "Verifies attestation language accuracy across the entire report"
+      },
+      {
+        "ref": "RQ-04",
+        "name": "Timeliness of reporting and BNM submission",
+        "scope": "Verifies report delivery and regulatory submission timelines"
+      },
+      {
+        "ref": "BD-01",
+        "name": "Board pack completeness",
+        "scope": "Verifies the board deliberation pack covers all assessment Parts"
+      },
+      {
+        "ref": "BD-02",
+        "name": "Presentation quality and accessibility",
+        "scope": "Verifies board presentation translates technical findings into business-impact terms"
+      },
+      {
+        "ref": "BD-03",
+        "name": "Action plan tracking and accountability",
+        "scope": "Verifies management action plan has owners, timelines, and board approval"
+      },
+      {
+        "ref": "FR-01",
+        "name": "MAP tracking mechanism",
+        "scope": "Verifies a formal mechanism exists for tracking remediation across all domains"
+      },
+      {
+        "ref": "FR-02",
+        "name": "Management action verification",
+        "scope": "Verifies closed actions were independently validated, not self-certified"
+      },
+      {
+        "ref": "FR-03",
+        "name": "Recurring and unresolved issues",
+        "scope": "Identifies findings that persist across assessment cycles and verifies escalation"
+      },
+      {
+        "ref": "FR-04",
+        "name": "BNM reporting of remediation progress",
+        "scope": "Verifies regulatory reporting of remediation status where required by BNM"
+      }
+    ]
+  }
+}
