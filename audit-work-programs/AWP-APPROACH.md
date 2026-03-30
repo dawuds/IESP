@@ -2,27 +2,54 @@
 
 **Last updated:** 2026-03-31
 
-## Principle: AWPs Are Anchored to Appendixes
+## Principle: AWPs Are Anchored to Control Sources
 
-Audit Work Programs (AWPs) are structured around the BNM RMiT Appendix that defines the controls to be assessed, not around engagement types or audit phases. This ensures the AWP scope directly mirrors the regulatory requirement.
+Audit Work Programs (AWPs) are structured around the BNM RMiT Appendix or clause that defines the **controls** to be assessed, not around engagement types or audit phases.
+
+**Important distinction — Appendix 7 is the reporting and IESP framework, not a control source:**
+
+| Appendix 7 Part | What It Is | Controls? |
+|-----------------|-----------|-----------|
+| Part A | Report format (6-section output template) | No |
+| Part B | CISO/board confirmation letter (9-point attestation) | No |
+| Part C | Requirements on the IESP (independence, competence, scope, methodology, reporting, QA) | No — governs the IESP |
+| Part D | Minimum controls to be assessed | **Yes** — the only part that defines controls |
+
+**Controls come from:**
+- Appendix 10 — cloud controls (Part A: 7 governance areas, Part B: 14 design/control areas)
+- Appendix 9 — emerging technology controls (5 assessment areas)
+- Clauses 10.24–10.28 — DC resilience controls
+- Clauses 10.36–10.43 — network resilience controls
+- Appendix 7 Part D — minimum controls baseline (applied to all engagements)
 
 ### Logic Chain
 
 ```
-BNM requires negative attestation (Appendix 7 Part C)
-  -> IESP must perform a controls assessment to form that opinion
-    -> Controls to assess are defined by the relevant Appendix
+BNM requires negative attestation (IESP complies with Appendix 7 Part C)
+  -> IESP performs a controls assessment to form that opinion
+    -> Controls to assess are defined by the relevant source:
       -> Cloud: Appendix 10 (Part A + Part B)
       -> Emerging Tech: Appendix 9 (5 areas)
+      -> DCRA: Clauses 10.24–10.28
+      -> NRA: Clauses 10.36–10.43
       -> All engagements: Appendix 7 Part D (minimum controls)
-    -> The AWP walks through every control in that Appendix
-      -> Each test step: objective, procedure, evidence, pass/fail
-  -> Findings feed into Part A report and Part C attestation opinion
+    -> The AWP walks through every control in that source
+      -> Each test step: ref, level, control, procedure, evidence, method
+  -> Report follows Appendix 7 Part A format
+  -> IESP attests under Part C; FI signs Part B (for pre-impl)
 ```
+
+### Overlap: Cloud + Emerging Technology
+
+When a cloud deployment involves emerging technology (e.g., AI/ML on cloud, cloud-native AI services like AWS Bedrock or Azure OpenAI), **both** Appendix 10 and Appendix 9 apply:
+- Appendix 10 governs the **cloud infrastructure** controls
+- Appendix 9 governs the **emerging technology** controls
+- Both AWP workbooks must be used in conjunction
+- Part D applies to both
 
 ### Negative Attestation (Part C)
 
-The IESP's deliverable is a negative assurance opinion under Appendix 7 Part C:
+The IESP's deliverable is a negative assurance opinion. The IESP must comply with Appendix 7 Part C requirements (independence, competence, scope, methodology, reporting, QA):
 
 > "Nothing has come to our attention that causes us to believe the controls are not operating effectively..."
 
