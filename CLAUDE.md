@@ -6,7 +6,7 @@
 Structured knowledge base and audit work programs for BNM RMiT Independent External Service Provider (IESP) assessments. SPA explorer with JSON data and markdown audit procedures. **Tier 1 Focus Area** in the GRC portfolio.
 
 ## Portfolio Role
-One of 5 Tier 1 focus areas. Practitioner-focused toolkit for conducting IESP assessments under BNM RMiT Appendix 7. Content is currently markdown-heavy — JSON-ification of engagements and evidence checklists is a priority.
+One of 5 Tier 1 focus areas. Practitioner-focused toolkit for conducting IESP assessments under BNM RMiT Appendix 7. Includes Excel AWP workbooks (working papers) and structured JSON data.
 
 ## Quick Start
 Open `index.html` in a browser. Run `node validate.js` to check data integrity. See `engagements.json` for structured engagement type data.
@@ -20,9 +20,21 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 - `audit-integration.json` — AWP-to-engagement linkage and audit workflow integration
 - `controls/control-domains.json`, `control-mapping.json` — Control structure
 - `decision-tree/decision-tree.json` — IESP classification decision logic
-- `audit-work-programs/` — 6 AWPs: cloud, DCRA, digital-services, NRA, AI/emerging-tech, Appendix 7 Part D
 - `requirements/` — Regulatory requirement breakdowns
 - `artifacts/inventory.json`, `clause-map.json`
+
+## AWP Workbooks (Excel — 12-column working papers)
+| Workbook | Anchored To | Sheets | Test Steps |
+|----------|------------|--------|-----------|
+| `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 | Methodology + App 10 Part A + App 10 Part B + Part D | 54 |
+| `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 | Methodology + Appendix 9 + Part D | 44 |
+| `IESP-DigitalServices-WorkProgram.xlsx` | 16.4/16.5 | Methodology + Digital Services + Part D | 49 |
+| `IESP-DCRA-WorkProgram.xlsx` | 10.24–10.28 | Methodology + DCRA + Part D | 49 |
+| `IESP-NRA-WorkProgram.xlsx` | 10.36–10.43 | Methodology + NRA + Part D | 49 |
+
+Format: 6 pre-populated columns (ref, control, sub-procedure, assessment procedures, expected evidence, method) + 6 auditor-fill columns (procedures performed, evidence obtained, evidence ref, observations, conclusion, recommendations). Regenerate with `python3 generate-awp-workbooks.py`.
+
+Legacy markdown AWPs remain in `audit-work-programs/awp-*.md` as reference.
 
 ## AWP Architecture
 AWPs are anchored to BNM RMiT Appendixes, not engagement types. The logic chain:
@@ -50,7 +62,9 @@ AWPs must be prescriptive enough for a junior auditor to execute without senior 
 
 ## Conventions
 - Kebab-case slugs for all IDs
-- AWP files are markdown with structured audit steps
+- AWP workbooks are Excel (12-column DAC format); legacy markdown AWPs retained as reference
+- Conclusion scale: Compliant / Partially Compliant / Non-Compliant / N/A
+- Evidence hierarchy: Direct observation > Independent confirmation > System-generated > Re-performance > Documentary > Inquiry
 
 ## Important
 - IESP classification (Appendix 7) determines assessment scope — misclassification affects entire audit
