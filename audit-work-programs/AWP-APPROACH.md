@@ -31,47 +31,59 @@ The AWP is the tool that generates sufficient appropriate evidence to support (o
 - **Type B (With Exceptions):** Material exceptions identified but not pervasive
 - **Type C (Adverse):** Pervasive control failures
 
-### AWP Workbooks (Excel — 12-Column Working Papers)
+### AWP Workbooks (Excel — 13-Column Working Papers)
 
-The primary AWP deliverables are Excel workbooks in the DAC-style 12-column format (modelled on the sc-gtrm-dac `DAC-Cybersecurity-Custody-WorkProgram.xlsx`). Each workbook is a complete working paper — the auditor fills in columns 7-12 as they execute.
+The primary AWP deliverables are Excel workbooks in a 13-column format (evolved from the DAC-style template in sc-gtrm-dac). Each workbook is a complete working paper — the auditor fills in columns 8-13 as they execute.
 
-| # | Workbook | Anchored To | Sheets | Test Steps |
-|---|----------|------------|--------|-----------|
-| 1 | `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 (Part A + Part B) | Methodology + App 10 Part A + App 10 Part B + Part D | 54 |
-| 2 | `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 (5 areas) | Methodology + Appendix 9 + Part D | 44 |
-| 3 | `IESP-DigitalServices-WorkProgram.xlsx` | RMiT 16.4/16.5 | Methodology + Digital Services + Part D | 49 |
-| 4 | `IESP-DCRA-WorkProgram.xlsx` | RMiT clauses 10.24–10.28 | Methodology + DCRA + Part D | 49 |
-| 5 | `IESP-NRA-WorkProgram.xlsx` | RMiT clauses 10.36–10.43 | Methodology + NRA + Part D | 49 |
+| # | Workbook | Anchored To | Test Steps |
+|---|----------|------------|-----------|
+| 1 | `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 (Part A + Part B) | 56 |
+| 2 | `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 (5 areas) | 47 |
+| 3 | `IESP-DigitalServices-WorkProgram.xlsx` | RMiT 16.4/16.5 | 49 |
+| 4 | `IESP-DCRA-WorkProgram.xlsx` | RMiT clauses 10.24–10.28 | 49 |
+| 5 | `IESP-NRA-WorkProgram.xlsx` | RMiT clauses 10.36–10.43 | 49 |
 
-**12-Column Format:**
+**13-Column Format:**
 
 | Col | Column Name | Pre-populated? | Purpose |
 |-----|------------|----------------|---------|
 | A | Ref | Yes | Unique test reference (e.g., CLD-01, PD-07) |
-| B | Control | Yes | Control domain name |
-| C | Sub-Procedure | Yes | Specific control aspect being tested |
-| D | Assessment Procedures | Yes | Numbered, prescriptive test steps |
-| E | Expected Evidence | Yes | Documents/artifacts to request |
-| F | Method | Yes | Inspection / Inquiry / Observation / Confirmation / Re-performance |
-| G | Procedures Performed | **Auditor fills** | What the auditor actually did |
-| H | Evidence Obtained | **Auditor fills** | What was actually provided |
-| I | Evidence Ref | **Auditor fills** | Working paper cross-reference |
-| J | Observation / Findings | **Auditor fills** | What was found |
-| K | Conclusion | **Auditor fills** | Compliant / Partially Compliant / Non-Compliant / N/A |
-| L | Recommendations | **Auditor fills** | Remediation advice |
+| B | Level | Yes | Assessment level: ORG / PLATFORM / WORKLOAD |
+| C | Control | Yes | Control domain name |
+| D | Sub-Procedure | Yes | Specific control aspect being tested |
+| E | Assessment Procedures | Yes | Numbered, prescriptive test steps |
+| F | Expected Evidence | Yes | Documents/artifacts to request |
+| G | Method | Yes | Inspection / Inquiry / Observation / Confirmation / Re-performance |
+| H | Procedures Performed | **Auditor fills** | What the auditor actually did |
+| I | Evidence Obtained | **Auditor fills** | What was actually provided |
+| J | Evidence Ref | **Auditor fills** | Working paper cross-reference |
+| K | Observation / Findings | **Auditor fills** | What was found |
+| L | Conclusion | **Auditor fills** | Compliant / Partially Compliant / Non-Compliant / N/A |
+| M | Recommendations | **Auditor fills** | Remediation advice |
 
-**Methodology & Approach Sheet** (common to all workbooks):
-- Engagement details (entity, type, date, assessor, reference)
-- Scope of assessment
-- Engagement mode guidance (design adequacy vs. operating effectiveness)
-- Assessment methods (Inspection, Inquiry, Observation, Confirmation, Re-performance)
-- Conclusion scale definitions
-- Evidence hierarchy (6 ranks)
-- Limitations and sign-off
+### Assessment Levels
 
-**Part D** is embedded as a sheet in every workbook — the auditor gets one file per engagement.
+Controls operate at different levels. The Level column (B) tells the auditor how to scope each test step:
 
-**Generation:** Workbooks are generated via `python3 generate-awp-workbooks.py` from the repo root for reproducibility. The script contains all test step content and can be updated to regenerate workbooks.
+| Level | Meaning | How to Use |
+|-------|---------|-----------|
+| **ORG** | Organisation / Enterprise | Assessed ONCE per engagement. Policies, governance, frameworks. |
+| **PLATFORM** | Platform / CSP | Assessed PER PLATFORM in scope. If FI uses AWS + Azure, repeat for each. |
+| **WORKLOAD** | System / Application | Assessed PER CRITICAL SYSTEM using sampling from the scoping sheet. |
+
+### Standard Sheets (8 per workbook)
+
+| # | Sheet | Purpose |
+|---|-------|---------|
+| 1 | **Methodology & Approach** | Engagement details, scope, mode, methods, conclusion scale, evidence hierarchy, limitations, sign-off |
+| 2 | **Scoping** | Assessment level definitions, platforms/CSPs in scope, critical systems in scope, sampling approach |
+| 3 | **Planning** | 14-step engagement planning checklist (trigger confirmation through scoping memo) |
+| 4-5 | **Domain Assessment(s)** | Pre-populated test steps anchored to the relevant Appendix |
+| 6 | **Appendix 7 Part D** | 29 minimum control test steps (universal baseline, embedded in every workbook) |
+| 7 | **Reporting & Attestation** | 16-step reporting checklist (findings consolidation through Part C opinion formation) |
+| 8 | **Part C Self-Assessment** | 6-requirement IESP self-assessment against Appendix 7 Part C |
+
+**Generation:** Workbooks are generated via `python3 generate-awp-workbooks.py` from the repo root. The script contains all test step content and can be updated to regenerate.
 
 ### Legacy Markdown AWPs
 

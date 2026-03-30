@@ -23,18 +23,22 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 - `requirements/` — Regulatory requirement breakdowns
 - `artifacts/inventory.json`, `clause-map.json`
 
-## AWP Workbooks (Excel — 12-column working papers)
-| Workbook | Anchored To | Sheets | Test Steps |
-|----------|------------|--------|-----------|
-| `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 | Methodology + App 10 Part A + App 10 Part B + Part D | 54 |
-| `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 | Methodology + Appendix 9 + Part D | 44 |
-| `IESP-DigitalServices-WorkProgram.xlsx` | 16.4/16.5 | Methodology + Digital Services + Part D | 49 |
-| `IESP-DCRA-WorkProgram.xlsx` | 10.24–10.28 | Methodology + DCRA + Part D | 49 |
-| `IESP-NRA-WorkProgram.xlsx` | 10.36–10.43 | Methodology + NRA + Part D | 49 |
+## AWP Workbooks (Excel — 13-column working papers)
+| Workbook | Anchored To | Test Steps |
+|----------|------------|-----------|
+| `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 (Part A + B) | 56 |
+| `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 | 47 |
+| `IESP-DigitalServices-WorkProgram.xlsx` | 16.4/16.5 | 49 |
+| `IESP-DCRA-WorkProgram.xlsx` | 10.24–10.28 | 49 |
+| `IESP-NRA-WorkProgram.xlsx` | 10.36–10.43 | 49 |
 
-Format: 6 pre-populated columns (ref, control, sub-procedure, assessment procedures, expected evidence, method) + 6 auditor-fill columns (procedures performed, evidence obtained, evidence ref, observations, conclusion, recommendations). Regenerate with `python3 generate-awp-workbooks.py`.
+**Standard sheets per workbook (8):** Methodology & Approach, Scoping, Planning, Domain Assessment(s), Appendix 7 Part D, Reporting & Attestation, Part C Self-Assessment.
 
-Legacy markdown AWPs remain in `audit-work-programs/awp-*.md` as reference.
+**13-column format:** Ref, Level (ORG/PLATFORM/WORKLOAD), Control, Sub-Procedure, Assessment Procedures, Expected Evidence, Method (pre-populated) + Procedures Performed, Evidence Obtained, Evidence Ref, Observations, Conclusion, Recommendations (auditor fills).
+
+**Assessment levels:** ORG (assessed once), PLATFORM (per CSP/platform in scope), WORKLOAD (per critical system, sample-based).
+
+Regenerate with `python3 generate-awp-workbooks.py`. Legacy markdown AWPs in `awp-*.md` retained as reference.
 
 ## AWP Architecture
 AWPs are anchored to BNM RMiT Appendixes, not engagement types. The logic chain:
@@ -62,9 +66,10 @@ AWPs must be prescriptive enough for a junior auditor to execute without senior 
 
 ## Conventions
 - Kebab-case slugs for all IDs
-- AWP workbooks are Excel (12-column DAC format); legacy markdown AWPs retained as reference
+- AWP workbooks are Excel (13-column format with assessment levels); legacy markdown AWPs retained as reference
 - Conclusion scale: Compliant / Partially Compliant / Non-Compliant / N/A
 - Evidence hierarchy: Direct observation > Independent confirmation > System-generated > Re-performance > Documentary > Inquiry
+- Assessment levels: ORG (once per engagement) > PLATFORM (per CSP) > WORKLOAD (per critical system)
 
 ## Important
 - IESP classification (Appendix 7) determines assessment scope — misclassification affects entire audit
