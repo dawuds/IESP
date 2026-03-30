@@ -16,6 +16,8 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 - **Schema**: GRC Portfolio v2.0 Standardized Schema
 
 ## Key Data Files
+- `engagements.json` — 7 structured IESP engagement types with clauses, scope, deliverables
+- `audit-integration.json` — AWP-to-engagement linkage and audit workflow integration
 - `controls/control-domains.json`, `control-mapping.json` — Control structure
 - `decision-tree/decision-tree.json` — IESP classification decision logic
 - `audit-work-programs/` — 6 AWPs: cloud, DCRA, digital-services, NRA, AI/emerging-tech, Appendix 7 Part D
