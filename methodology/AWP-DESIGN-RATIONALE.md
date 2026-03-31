@@ -5,6 +5,24 @@
 
 ---
 
+## 0. Core Principle
+
+**Build forward from source documents, not backwards from interpretation.**
+
+Every compliance-rated audit requirement must be traceable to a specific clause in a gazetted document. Professional constructs (methodology, sampling, evidence hierarchy) are valuable but they are NOT audit criteria — they support the audit.
+
+This distinction is the difference between a defensible AWP and one that gets challenged in the first engagement.
+
+In practice:
+- The **BNM Ref column** exists because of this principle — every test row must trace to a specific gazetted requirement or be clearly marked as best practice
+- The **regulatory source** (Appendix 10, Appendix 9, clauses 10.24-10.28, etc.) defines what gets tested. The AWP does not invent requirements.
+- **Best practice additions** (blank BNM Ref) are the IESP's professional value-add. They are recommended, not mandated. If an FI pushes back on a best practice finding, the IESP cannot cite a gazetted clause — only professional judgement.
+- **Methodology, sampling tables, evidence hierarchy, conclusion scales** — these are professional constructs that support the audit process. They are NOT audit criteria. The audit criteria come from the gazetted document.
+
+This principle applies to all GRC portfolio AWPs, not just IESP.
+
+---
+
 ## 1. Design Principles
 
 ### 1.1 The AWP Is Both Work Program AND Working Paper
