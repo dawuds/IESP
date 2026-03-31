@@ -1,6 +1,6 @@
 # IESP — BNM RMiT IESP Audit Work Programs
 
-**Last updated:** 2026-03-31
+**Last updated:** 2026-04-01
 
 ## What This Is
 Structured knowledge base and audit work programs for BNM RMiT Independent External Service Provider (IESP) assessments. SPA explorer with JSON data and markdown audit procedures. **Tier 1 Focus Area** in the GRC portfolio.
@@ -24,36 +24,39 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 - `requirements/` — Regulatory requirement breakdowns
 - `artifacts/inventory.json`, `clause-map.json`
 
-## AWP Workbooks (in Tech-Audit/IESP/)
-The 5 Excel AWP workbooks have been moved to Tech-Audit/IESP/ (private repo):
-
-| Workbook | Anchored To | Test Steps |
-|----------|------------|-----------|
-| `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 (Part A + B) | 56 |
-| `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 | 47 |
-| `IESP-DigitalServices-WorkProgram.xlsx` | 16.4/16.5 | 49 |
-| `IESP-DCRA-WorkProgram.xlsx` | 10.24–10.28 | 49 |
-| `IESP-NRA-WorkProgram.xlsx` | 10.36–10.43 | 49 |
+## AWP Workbooks
+| Workbook | Anchored To | Domains | Sub-Items |
+|----------|------------|---------|-----------|
+| `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 (Part A + B) | 32 | 148 |
+| `IESP-EmergingTech-WorkProgram.xlsx` | Appendix 9 | 18 | 66 |
+| `IESP-DigitalServices-WorkProgram.xlsx` | 16.4/16.5 | 16 | 64 |
+| `IESP-DCRA-WorkProgram.xlsx` | 10.24–10.28 | 16 | 63 |
+| `IESP-NRA-WorkProgram.xlsx` | 10.36–10.43 | 19 | 64 |
 
 **Standard sheets per workbook (9):** Methodology & Approach, Scoping, Planning, Domain Assessment(s), Appendix 7 Part D, Reporting & Attestation, Part C Self-Assessment, Scoring Dashboard.
 
-**13-column format:** Ref, Level (ORG/PLATFORM/WORKLOAD), Control, Sub-Procedure, Assessment Procedures, Expected Evidence, Method (pre-populated) + Procedures Performed, Evidence Obtained, Evidence Ref, Observations, Conclusion, Recommendations (auditor fills).
+**14-column format:** BNM Ref, Ref, Level (ORG/PLATFORM/WORKLOAD), Control, Sub-Procedure, Assessment Procedures, Expected Evidence, Method (pre-populated) + Procedures Performed, Evidence Obtained, Evidence Ref, Observations, Conclusion, Recommendations (auditor fills).
+
+**Domain-level conclusions:** Auditor gives ONE conclusion per control domain (not per sub-item). Sub-items are individual BNM requirements that feed observations into the domain conclusion. Best practice additions have blank BNM Ref — clearly separated from regulatory requirements.
 
 **Assessment levels:** ORG (assessed once), PLATFORM (per CSP/platform in scope), WORKLOAD (per critical system, sample-based).
 
-Markdown AWPs in `audit-work-programs/awp-*.md` retained in this repo as reference.
+Regenerate with `python3 generate-awp-workbooks.py`. Legacy markdown AWPs in `awp-*.md` retained as reference.
 
 ## AWP Architecture
 AWPs are anchored to BNM RMiT control sources (Appendixes and clauses), not engagement types. Appendix 7 is the **reporting and IESP framework**, not a control source — only Part D defines controls.
 
-**Control sources:**
-| Source | Controls | Used By |
-|--------|---------|---------|
-| Appendix 10 | Cloud governance (7 areas) + design/controls (14 areas) | Cloud pre-impl + attestation |
-| Appendix 9 | Emerging tech (5 assessment areas) | Emerging tech pre-impl + attestation |
-| Appendix 7 Part D | Minimum controls: items 1(a-f) + 2(a-e) | ALL engagements (universal baseline) |
-| Clauses 10.24–10.28 | DC resilience controls | DCRA engagements |
-| Clauses 10.36–10.43 | Network resilience controls | NRA engagements |
+**Control sources (57 unique domains, 11 shared via Part D):**
+| Source | Domains | Sub-Items | Used By |
+|--------|---------|-----------|---------|
+| Appendix 10 Part A | 7 governance | 30 | Cloud |
+| Appendix 10 Part B | 14 design/controls | 74 | Cloud |
+| Appendix 9 (BNM) | 2 | 9 | Emerging tech |
+| Appendix 9 (best practice) | 5 | 13 | Emerging tech |
+| Clauses 10.24–10.28 | 5 | 19 | DCRA |
+| Clauses 10.36–10.43 | 8 | 20 | NRA |
+| Digital services | 5 | 20 | Digital services |
+| Appendix 7 Part D | 11 | 44 | ALL engagements |
 
 **Appendix 7 (reporting framework, not controls):**
 - Part A — Report format (6-section output template)
@@ -77,7 +80,7 @@ AWPs must be prescriptive enough for a junior auditor to execute without senior 
 
 ## Conventions
 - Kebab-case slugs for all IDs
-- AWP workbooks (Excel, 13-column format) are in Tech-Audit/IESP/; markdown AWPs retained in this repo as reference
+- AWP workbooks use 14-column format with BNM Ref traceability and domain-level conclusions
 - Conclusion scale: Compliant / Partially Compliant / Non-Compliant / N/A
 - Evidence hierarchy: Direct observation > Independent confirmation > System-generated > Re-performance > Documentary > Inquiry
 - Assessment levels: ORG (once per engagement) > PLATFORM (per CSP) > WORKLOAD (per critical system)

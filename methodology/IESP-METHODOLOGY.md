@@ -1,7 +1,7 @@
 # IESP Assessment Methodology
 
 **Source:** BNM RMiT (BNM/RH/PD 028-98, 28 November 2025)
-**Last updated:** 2026-03-31
+**Last updated:** 2026-04-01
 
 ---
 
@@ -184,19 +184,41 @@ Every engagement operates in one of two modes. The same controls are assessed, b
 
 ### Phase 3: Controls Assessment
 
-Use the AWP workbook for the relevant engagement type. Each workbook contains:
-- Pre-populated test steps anchored to the control source (appendix/clauses)
-- Assessment level tags (ORG/PLATFORM/WORKLOAD) telling you what to repeat
-- Context rows explaining why each control matters
-- Part D minimum controls (embedded in every workbook)
+Use the AWP workbook for the relevant engagement type. Each workbook uses a **14-column format** with two row types:
 
-For each test step:
+**Domain rows** (bold, green) — one per control domain. This is where the conclusion is given.
+**Sub-item rows** — individual BNM requirements under each domain. The auditor tests each sub-item, records observations, and these roll up to the domain conclusion.
+
+```
+Domain: CLD-01 — Cloud Risk Management [CONCLUSION HERE]
+  └── CLD-01.1  App10-A1(a)  Board governance principles      [observation]
+  └── CLD-01.2  App10-A1(b)  Cloud risk management framework   [observation]
+  └── CLD-01.3  App10-A1(c)  Shared responsibility model       [observation]
+  └── ...
+```
+
+**BNM Ref column** (column A) traces every sub-item to the exact source requirement. Rows with blank BNM Ref are best practice additions — valuable but not regulatory mandates.
+
+For each sub-item:
 1. Perform the assessment procedures as documented
 2. Gather evidence — prefer higher-ranked evidence (observation > system-generated > documentary > inquiry)
 3. Document procedures performed, evidence obtained, and evidence reference
-4. Record observations/findings
-5. Assign conclusion: **Compliant / Partially Compliant / Non-Compliant / N/A**
-6. Document recommendations for non-compliant/partially compliant findings
+4. Record observations in the sub-item row
+
+For each domain (after completing all sub-items):
+1. Review all sub-item observations
+2. Assign **one conclusion** for the domain: **Compliant / Partially Compliant / Non-Compliant / N/A**
+3. Document recommendations for non-compliant/partially compliant domains
+
+**Control domain counts per engagement:**
+
+| Engagement | Domain-Specific | Part D | Total Conclusions |
+|-----------|----------------|--------|-------------------|
+| Cloud | 21 (7 Part A + 14 Part B) | 11 | **32** |
+| Emerging Tech | 7 (2 BNM + 5 best practice) | 11 | **18** |
+| Digital Services | 5 | 11 | **16** |
+| DCRA | 5 | 11 | **16** |
+| NRA | 8 | 11 | **19** |
 
 ### Phase 4: Opinion Formation
 
