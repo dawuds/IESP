@@ -762,6 +762,303 @@ def add_part_d_sheet(wb, sheet_name='Appendix 7 Part D'):
     return ws
 
 
+# ── Scoring Dashboard ──────────────────────────────────────────────
+NON_ASSESSMENT_SHEETS = {
+    'Methodology & Approach', 'Scoping', 'Planning',
+    'Reporting & Attestation', 'Part C Self-Assessment', 'Scoring Dashboard',
+}
+
+COMPLIANT_FILL = PatternFill(start_color='C6EFCE', end_color='C6EFCE', fill_type='solid')
+PARTIAL_FILL = PatternFill(start_color='FFEB9C', end_color='FFEB9C', fill_type='solid')
+NON_COMPLIANT_FILL = PatternFill(start_color='FFC7CE', end_color='FFC7CE', fill_type='solid')
+NA_FILL = PatternFill(start_color='D9D9D9', end_color='D9D9D9', fill_type='solid')
+SCORE_FONT_GREEN = Font(name='Calibri', bold=True, size=11, color='006100')
+SCORE_FONT_AMBER = Font(name='Calibri', bold=True, size=11, color='9C6500')
+SCORE_FONT_RED = Font(name='Calibri', bold=True, size=11, color='9C0006')
+
+
+def add_scoring_sheet(wb):
+    """Add a Scoring Dashboard sheet with per-sheet summaries, overall totals,
+    Part C opinion indicator, and level breakdown using live COUNTIF formulas."""
+    ws = wb.create_sheet(title='Scoring Dashboard')
+    ws.column_dimensions['A'].width = 35
+    ws.column_dimensions['B'].width = 16
+    ws.column_dimensions['C'].width = 20
+    ws.column_dimensions['D'].width = 18
+    ws.column_dimensions['E'].width = 14
+    ws.column_dimensions['F'].width = 16
+    ws.column_dimensions['G'].width = 16
+    ws.column_dimensions['H'].width = 18
+
+    # Identify assessment sheets
+    assessment_sheets = [
+        s for s in wb.sheetnames if s not in NON_ASSESSMENT_SHEETS
+    ]
+
+    r = 1
+    # ── Title ──
+    ws.merge_cells(f'A{r}:H{r}')
+    ws.cell(row=r, column=1, value='SCORING DASHBOARD').font = TITLE_FONT
+    r += 2
+
+    # ── Overall Summary ──
+    ws.merge_cells(f'A{r}:H{r}')
+    ws.cell(row=r, column=1, value='OVERALL SUMMARY').font = SUBTITLE_FONT
+    r += 1
+
+    overall_headers = ['Metric', 'Value']
+    for col, h in enumerate(overall_headers, 1):
+        c = ws.cell(row=r, column=col, value=h)
+        c.font = HEADER_FONT
+        c.fill = HEADER_FILL
+        c.border = THIN_BORDER
+    r += 1
+
+    # We'll place per-sheet data starting at per_sheet_start_row
+    # Overall summary references those rows via SUM formulas
+    # We need to know where per-sheet data will be, so calculate offsets
+    # Overall summary rows: 7 metric rows (Compliant, Partial, NC, NA, Not Assessed, Total, Compliance %)
+    # + 1 blank + Part C opinion = 9 rows
+    # Then blank, level breakdown section
+    overall_start_row = r  # first data row of overall summary
+
+    overall_labels = [
+        'Total Compliant',
+        'Total Partially Compliant',
+        'Total Non-Compliant',
+        'Total N/A',
+        'Total Not Assessed',
+        'Total Test Steps',
+        'Overall Compliance %',
+    ]
+    # Reserve rows for overall metrics (we'll fill formulas after per-sheet section)
+    for label in overall_labels:
+        ws.cell(row=r, column=1, value=label).font = LABEL_FONT
+        ws.cell(row=r, column=1).border = THIN_BORDER
+        ws.cell(row=r, column=2).font = VALUE_FONT
+        ws.cell(row=r, column=2).border = THIN_BORDER
+        r += 1
+
+    r += 1
+    # Part C opinion indicator
+    ws.merge_cells(f'A{r}:B{r}')
+    ws.cell(row=r, column=1, value='PART C OPINION INDICATOR').font = SUBTITLE_FONT
+    r += 1
+    ws.cell(row=r, column=1, value='Opinion Type').font = LABEL_FONT
+    ws.cell(row=r, column=1).border = THIN_BORDER
+    ws.cell(row=r, column=2).border = THIN_BORDER
+    opinion_row = r
+    r += 1
+
+    ws.cell(row=r, column=1, value='Criteria:').font = CONTEXT_FONT
+    ws.cell(row=r, column=1).border = THIN_BORDER
+    ws.merge_cells(f'B{r}:H{r}')
+    ws.cell(row=r, column=2,
+            value='Type A (Clean): NC=0 and PC<=3  |  '
+                  'Type B (With Exceptions): NC>0 and NC<=5  |  '
+                  'Type C (Adverse): NC>5').font = CONTEXT_FONT
+    ws.cell(row=r, column=2).alignment = WRAP_ALIGN
+    ws.cell(row=r, column=2).border = THIN_BORDER
+    r += 2
+
+    # ── Per-Sheet Summary ──
+    ws.merge_cells(f'A{r}:H{r}')
+    ws.cell(row=r, column=1, value='PER-SHEET BREAKDOWN').font = SUBTITLE_FONT
+    r += 1
+
+    ps_headers = ['Sheet', 'Compliant', 'Partially Compliant',
+                  'Non-Compliant', 'N/A', 'Not Assessed', 'Total Steps',
+                  'Compliance %']
+    for col, h in enumerate(ps_headers, 1):
+        c = ws.cell(row=r, column=col, value=h)
+        c.font = HEADER_FONT
+        c.fill = HEADER_FILL
+        c.border = THIN_BORDER
+        c.alignment = CENTER_ALIGN
+    r += 1
+
+    per_sheet_first_row = r
+    per_sheet_col_map = {
+        'compliant': 'B',
+        'partial': 'C',
+        'nc': 'D',
+        'na': 'E',
+        'not_assessed': 'F',
+        'total': 'G',
+        'pct': 'H',
+    }
+
+    for sheet_name in assessment_sheets:
+        ws.cell(row=r, column=1, value=sheet_name).font = LABEL_FONT
+        ws.cell(row=r, column=1).border = THIN_BORDER
+
+        safe = sheet_name.replace("'", "''")
+
+        # Compliant count — COUNTIF on column L
+        ws.cell(row=r, column=2).font = VALUE_FONT
+        ws.cell(row=r, column=2).border = THIN_BORDER
+        ws.cell(row=r, column=2).fill = COMPLIANT_FILL
+        ws.cell(row=r, column=2,
+                value=f"=COUNTIF('{safe}'!L:L,\"Compliant\")")
+
+        # Partially Compliant
+        ws.cell(row=r, column=3).font = VALUE_FONT
+        ws.cell(row=r, column=3).border = THIN_BORDER
+        ws.cell(row=r, column=3).fill = PARTIAL_FILL
+        ws.cell(row=r, column=3,
+                value=f"=COUNTIF('{safe}'!L:L,\"Partially Compliant\")")
+
+        # Non-Compliant
+        ws.cell(row=r, column=4).font = VALUE_FONT
+        ws.cell(row=r, column=4).border = THIN_BORDER
+        ws.cell(row=r, column=4).fill = NON_COMPLIANT_FILL
+        ws.cell(row=r, column=4,
+                value=f"=COUNTIF('{safe}'!L:L,\"Non-Compliant\")")
+
+        # N/A
+        ws.cell(row=r, column=5).font = VALUE_FONT
+        ws.cell(row=r, column=5).border = THIN_BORDER
+        ws.cell(row=r, column=5).fill = NA_FILL
+        ws.cell(row=r, column=5,
+                value=f"=COUNTIF('{safe}'!L:L,\"N/A\")")
+
+        # Not Assessed (blank conclusions where a Ref exists in col A)
+        ws.cell(row=r, column=6).font = VALUE_FONT
+        ws.cell(row=r, column=6).border = THIN_BORDER
+        ws.cell(row=r, column=6,
+                value=f"=COUNTIFS('{safe}'!A:A,\"<>\",'{safe}'!L:L,\"=\")"
+                      f"-COUNTIF('{safe}'!A:A,\"Ref\")")
+
+        # Total test steps (rows with a Ref value, minus header row)
+        ws.cell(row=r, column=7).font = VALUE_FONT
+        ws.cell(row=r, column=7).border = THIN_BORDER
+        ws.cell(row=r, column=7,
+                value=f"=COUNTA('{safe}'!A:A)"
+                      f"-COUNTIF('{safe}'!A:A,\"Ref\")-COUNTBLANK('{safe}'!A1)")
+
+        # Compliance % = Compliant / (Total - N/A - Not Assessed)
+        b_col = f'B{r}'
+        g_col = f'G{r}'
+        e_col = f'E{r}'
+        f_col = f'F{r}'
+        ws.cell(row=r, column=8).font = VALUE_FONT
+        ws.cell(row=r, column=8).border = THIN_BORDER
+        ws.cell(row=r, column=8).number_format = '0.0%'
+        ws.cell(row=r, column=8,
+                value=f'=IF(({g_col}-{e_col}-{f_col})=0,"—",'
+                      f'{b_col}/({g_col}-{e_col}-{f_col}))')
+
+        r += 1
+
+    per_sheet_last_row = r - 1
+
+    # ── Fill Overall Summary formulas ──
+    # Row references for per-sheet columns
+    ps_range_b = f'B{per_sheet_first_row}:B{per_sheet_last_row}'
+    ps_range_c = f'C{per_sheet_first_row}:C{per_sheet_last_row}'
+    ps_range_d = f'D{per_sheet_first_row}:D{per_sheet_last_row}'
+    ps_range_e = f'E{per_sheet_first_row}:E{per_sheet_last_row}'
+    ps_range_f = f'F{per_sheet_first_row}:F{per_sheet_last_row}'
+    ps_range_g = f'G{per_sheet_first_row}:G{per_sheet_last_row}'
+
+    or_row = overall_start_row  # Total Compliant
+    ws.cell(row=or_row, column=2, value=f'=SUM({ps_range_b})')
+    ws.cell(row=or_row, column=2).fill = COMPLIANT_FILL
+    or_row += 1  # Total Partially Compliant
+    ws.cell(row=or_row, column=2, value=f'=SUM({ps_range_c})')
+    ws.cell(row=or_row, column=2).fill = PARTIAL_FILL
+    or_row += 1  # Total Non-Compliant
+    ws.cell(row=or_row, column=2, value=f'=SUM({ps_range_d})')
+    ws.cell(row=or_row, column=2).fill = NON_COMPLIANT_FILL
+    nc_cell = f'B{or_row}'
+    or_row += 1  # Total N/A
+    ws.cell(row=or_row, column=2, value=f'=SUM({ps_range_e})')
+    ws.cell(row=or_row, column=2).fill = NA_FILL
+    na_total_cell = f'B{or_row}'
+    or_row += 1  # Total Not Assessed
+    ws.cell(row=or_row, column=2, value=f'=SUM({ps_range_f})')
+    not_assessed_cell = f'B{or_row}'
+    or_row += 1  # Total Test Steps
+    ws.cell(row=or_row, column=2, value=f'=SUM({ps_range_g})')
+    total_cell = f'B{or_row}'
+    or_row += 1  # Overall Compliance %
+    compliant_cell = f'B{overall_start_row}'
+    ws.cell(row=or_row, column=2).number_format = '0.0%'
+    ws.cell(row=or_row, column=2,
+            value=f'=IF(({total_cell}-{na_total_cell}-{not_assessed_cell})=0,"—",'
+                  f'{compliant_cell}/({total_cell}-{na_total_cell}-{not_assessed_cell}))')
+
+    # Part C opinion IF formula
+    pc_cell = f'B{overall_start_row + 1}'  # Partially Compliant total
+    ws.cell(row=opinion_row, column=2,
+            value=f'=IF({nc_cell}>5,"Type C (Adverse)",'
+                  f'IF({nc_cell}>0,"Type B (With Exceptions)",'
+                  f'IF({pc_cell}<=3,"Type A (Clean)","Type B (With Exceptions)")))')
+
+    r += 2
+
+    # ── Level Breakdown ──
+    ws.merge_cells(f'A{r}:H{r}')
+    ws.cell(row=r, column=1, value='LEVEL BREAKDOWN').font = SUBTITLE_FONT
+    r += 1
+
+    lvl_headers = ['Level', 'Compliant', 'Partially Compliant',
+                   'Non-Compliant', 'N/A', 'Not Assessed', 'Total', '']
+    for col, h in enumerate(lvl_headers, 1):
+        c = ws.cell(row=r, column=col, value=h)
+        c.font = HEADER_FONT
+        c.fill = HEADER_FILL
+        c.border = THIN_BORDER
+        c.alignment = CENTER_ALIGN
+    r += 1
+
+    for level in ['ORG', 'PLATFORM', 'WORKLOAD']:
+        ws.cell(row=r, column=1, value=level).font = LABEL_FONT
+        ws.cell(row=r, column=1).border = THIN_BORDER
+
+        # Build COUNTIFS formulas summing across all assessment sheets
+        # Each conclusion type needs: COUNTIFS(sheet!B:B,"LEVEL",sheet!L:L,"conclusion")
+        conclusions = [
+            ('Compliant', 2, COMPLIANT_FILL),
+            ('Partially Compliant', 3, PARTIAL_FILL),
+            ('Non-Compliant', 4, NON_COMPLIANT_FILL),
+            ('N/A', 5, NA_FILL),
+        ]
+        for conclusion, col_idx, fill in conclusions:
+            parts = []
+            for sn in assessment_sheets:
+                safe = sn.replace("'", "''")
+                parts.append(
+                    f"COUNTIFS('{safe}'!B:B,\"{level}\",'{safe}'!L:L,\"{conclusion}\")"
+                )
+            formula = '=' + '+'.join(parts) if parts else '=0'
+            c = ws.cell(row=r, column=col_idx, value=formula)
+            c.font = VALUE_FONT
+            c.border = THIN_BORDER
+            c.fill = fill
+
+        # Not Assessed by level: rows with matching level in B and blank in L
+        na_parts = []
+        for sn in assessment_sheets:
+            safe = sn.replace("'", "''")
+            na_parts.append(
+                f"COUNTIFS('{safe}'!B:B,\"{level}\",'{safe}'!L:L,\"=\")"
+            )
+        na_formula = '=' + '+'.join(na_parts) if na_parts else '=0'
+        c = ws.cell(row=r, column=6, value=na_formula)
+        c.font = VALUE_FONT
+        c.border = THIN_BORDER
+
+        # Total by level
+        ws.cell(row=r, column=7,
+                value=f'=SUM(B{r}:F{r})').font = VALUE_FONT
+        ws.cell(row=r, column=7).border = THIN_BORDER
+
+        r += 1
+
+    return ws
+
+
 # ── Helper to build a workbook with all common sheets ───────────────
 def build_workbook(engagement_name, regulatory_basis, scope_desc,
                    assessment_covers, engagement_type_label,
@@ -777,6 +1074,7 @@ def build_workbook(engagement_name, regulatory_basis, scope_desc,
     add_part_d_sheet(wb)
     add_reporting_sheet(wb)
     add_part_c_sheet(wb)
+    add_scoring_sheet(wb)
     return wb
 
 
