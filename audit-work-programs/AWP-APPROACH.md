@@ -98,17 +98,18 @@ Controls operate at different levels. The Level column (B) tells the auditor how
 | **PLATFORM** | Platform / CSP | Assessed PER PLATFORM in scope. If FI uses AWS + Azure, repeat for each. |
 | **WORKLOAD** | System / Application | Assessed PER CRITICAL SYSTEM using sampling from the scoping sheet. |
 
-### Standard Sheets (8 per workbook)
+### Standard Sheets (9 per workbook)
 
 | # | Sheet | Purpose |
 |---|-------|---------|
-| 1 | **Methodology & Approach** | Engagement details, scope, mode, methods, conclusion scale, evidence hierarchy, limitations, sign-off |
+| 1 | **Methodology & Approach** | Engagement details, scope, mode, methods, conclusion scale, evidence hierarchy, sampling methodology, limitations, sign-off |
 | 2 | **Scoping** | Assessment level definitions, platforms/CSPs in scope, critical systems in scope, sampling approach |
 | 3 | **Planning** | 14-step engagement planning checklist (trigger confirmation through scoping memo) |
-| 4-5 | **Domain Assessment(s)** | Pre-populated test steps anchored to the relevant Appendix |
+| 4-5 | **Domain Assessment(s)** | Pre-populated test steps with context rows (why, what good looks like, key risk) anchored to the relevant Appendix/clauses |
 | 6 | **Appendix 7 Part D** | 29 minimum control test steps (universal baseline, embedded in every workbook) |
 | 7 | **Reporting & Attestation** | 16-step reporting checklist (findings consolidation through Part C opinion formation) |
 | 8 | **Part C Self-Assessment** | 6-requirement IESP self-assessment against Appendix 7 Part C |
+| 9 | **Scoring Dashboard** | Live COUNTIF formulas: per-sheet compliance counts, overall %, Part C opinion indicator (Type A/B/C), level breakdown |
 
 **Generation:** Workbooks are generated via `python3 generate-awp-workbooks.py` from the repo root. The script contains all test step content and can be updated to regenerate.
 
