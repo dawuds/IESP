@@ -6,7 +6,7 @@
 Structured knowledge base and audit work programs for BNM RMiT Independent External Service Provider (IESP) assessments. SPA explorer with JSON data and markdown audit procedures. **Tier 1 Focus Area** in the GRC portfolio.
 
 ## Portfolio Role
-One of 5 Tier 1 focus areas. Practitioner-focused toolkit for conducting IESP assessments under BNM RMiT. Includes Excel AWP workbooks (working papers), Word report template, evidence folder structure, and structured JSON data.
+One of 5 Tier 1 focus areas. Practitioner-focused toolkit for conducting IESP assessments under BNM RMiT. Includes markdown audit procedures and structured JSON data. Excel AWP workbooks, Word report template, and evidence folder structure are in Tech-Audit/IESP/ (private repo).
 
 ## Quick Start
 Open `index.html` in a browser. Run `node validate.js` to check data integrity. See `engagements.json` for structured engagement type data.
@@ -23,7 +23,9 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 - `requirements/` — Regulatory requirement breakdowns
 - `artifacts/inventory.json`, `clause-map.json`
 
-## AWP Workbooks (Excel — 13-column working papers)
+## AWP Workbooks (in Tech-Audit/IESP/)
+The 5 Excel AWP workbooks have been moved to Tech-Audit/IESP/ (private repo):
+
 | Workbook | Anchored To | Test Steps |
 |----------|------------|-----------|
 | `IESP-Cloud-WorkProgram.xlsx` | Appendix 10 (Part A + B) | 56 |
@@ -38,7 +40,7 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 
 **Assessment levels:** ORG (assessed once), PLATFORM (per CSP/platform in scope), WORKLOAD (per critical system, sample-based).
 
-Regenerate with `python3 generate-awp-workbooks.py`. Legacy markdown AWPs in `awp-*.md` retained as reference.
+Markdown AWPs in `audit-work-programs/awp-*.md` retained in this repo as reference.
 
 ## AWP Architecture
 AWPs are anchored to BNM RMiT control sources (Appendixes and clauses), not engagement types. Appendix 7 is the **reporting and IESP framework**, not a control source — only Part D defines controls.
@@ -66,14 +68,15 @@ AWPs are anchored to BNM RMiT control sources (Appendixes and clauses), not enga
 
 AWPs must be prescriptive enough for a junior auditor to execute without senior interpretation.
 
-## Report Template and Evidence
-- `templates/IESP-Report-Template.docx` — Appendix 7 Part A format with Part C attestation (Type A/B/C)
-- `templates/evidence-folder-structure.md` — Evidence folder documentation
+## Report Template and Evidence (in Tech-Audit/IESP/)
+- `IESP-Report-Template.docx` — Appendix 7 Part A format with Part C attestation (Type A/B/C)
+- `evidence-folder-structure.md` — Evidence folder documentation
 - `create-evidence-structure.sh` — Generates 66-folder evidence structure per engagement
+- `AWP-APPROACH.md` — AWP design approach documentation
 
 ## Conventions
 - Kebab-case slugs for all IDs
-- AWP workbooks are Excel (13-column format with assessment levels); legacy markdown AWPs retained as reference
+- AWP workbooks (Excel, 13-column format) are in Tech-Audit/IESP/; markdown AWPs retained in this repo as reference
 - Conclusion scale: Compliant / Partially Compliant / Non-Compliant / N/A
 - Evidence hierarchy: Direct observation > Independent confirmation > System-generated > Re-performance > Documentary > Inquiry
 - Assessment levels: ORG (once per engagement) > PLATFORM (per CSP) > WORKLOAD (per critical system)
@@ -94,5 +97,5 @@ node validate.js
 - [pdpa-my](https://github.com/dawuds/pdpa-my) — PDPA data protection overlaps with IESP assessment scope (Tier 1)
 - [AI-Governance](https://github.com/dawuds/AI-Governance) — AI/emerging tech is an IESP engagement type (Tier 1)
 - [sc-gtrm](https://github.com/dawuds/sc-gtrm) — Parallel assessment framework for capital markets (Tier 1)
-- [Tech-Audit](https://github.com/dawuds/Tech-Audit) — Audit methodology; IESP domain planned (Tier 2)
+- [Tech-Audit/IESP](https://github.com/dawuds/Tech-Audit) — IESP audit toolkit (5 Excel workbooks, report template, evidence structure, AWP approach) (Tier 2)
 - [grc](https://github.com/dawuds/grc) — Portfolio hub
