@@ -16,6 +16,7 @@ Open `index.html` in a browser. Run `node validate.js` to check data integrity. 
 - **Schema**: GRC Portfolio v2.0 Standardized Schema
 
 ## Key Data Files
+- `methodology/IESP-METHODOLOGY.md` — End-to-end IESP assessment methodology (start here)
 - `engagements.json` — 7 structured IESP engagement types with clauses, scope, deliverables
 - `audit-integration.json` — AWP-to-engagement linkage and audit workflow integration
 - `controls/control-domains.json`, `control-mapping.json` — Control structure
